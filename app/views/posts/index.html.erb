@@ -1,1 +1,9 @@
 <h1>Homepage</h1>
+<p>display user and friends posts <p>
+
+<%current_user.posts.each do |post|%>
+    <%=post.title%>
+    <%=post.body%>
+    <%=post.likes%>
+    <%=post.user%>
+<%end%>
