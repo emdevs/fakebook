@@ -5,3 +5,8 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+
+requests = FriendRequest.create([{"requester_id": 1, "reciever_id": 2}])
+
+friendships = Friendship.create([{"friend_a_id": 1, "friend_b_id": 2}])
