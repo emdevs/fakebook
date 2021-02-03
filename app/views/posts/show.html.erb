@@ -1,8 +1,12 @@
-<%=@post.title%>
 
-<%=@post.body%>
+<p>
+    <%=@post.title%>
 
-<%=@post.likes%>
+    <%=@post.body%>
 
+    <%=@post.likes%>
+</p>
+
+<br>
 <%=link_to "Edit", edit_post_path(@post)%>
 <%=link_to "Delete", post_path(@post), method: :delete, data: {confirm: "Are you sure?"} %>
