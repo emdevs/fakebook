@@ -1,10 +1,14 @@
 class PostsController < ApplicationController
     def index #timeline feature
+        @posts = Post.all
         #only posts of signed in author and their friends
     end
 
     def show
         @post = Post.find(params[:id])
+
+        #generate new comment obj
+        @comment = current_user.comments.build
     end
 
     def new
@@ -46,6 +50,9 @@ class PostsController < ApplicationController
 
     def like
         @post = Post.find(params[:id])
+
+        Like.create(user_id: current_user.id, post_id: @post.id)
+        redirect_to @post
     end
 
     private

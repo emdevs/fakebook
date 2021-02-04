@@ -1,12 +1,15 @@
 <h1>Homepage</h1>
 <p>display user and friends posts <p>
 
-<%current_user.posts.each do |post|%>
-    <%=post.title%>
-    <%=post.body%>
-    <%=post.likes%>
-    <%=post.user.name%>
+<%@posts.each do |post|%>
+    <div>
+        <b><%=post.title%></b><br>
+        <%=post.body%>
 
-    <%=button_to "Like"%>
-    <%=button_to "Comment"%>
+        <p>Likes: <%=post.likes.count%></p>
+        <p>Author: <%=post.user.name%></p>
+        
+
+        <%=link_to "View more", post_path(post.id)%>
+    </div>
 <%end%>

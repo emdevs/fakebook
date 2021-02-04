@@ -1,12 +1,29 @@
+<h1><%=@post.title%></h1>
+<div>
+    <%=@post.body%><br>
 
-<p>
-    <%=@post.title%>
-
-    <%=@post.body%>
-
-    <%=@post.likes%>
-</p>
+    <p>Likes: <%=@post.likes.count%><p>
+</div>
 
 <br>
-<%=link_to "Edit", edit_post_path(@post)%>
-<%=link_to "Delete", post_path(@post), method: :delete, data: {confirm: "Are you sure?"} %>
+
+<%if current_user.id == @post.user_id%>
+    <%=link_to "Edit", edit_post_path(@post)%>
+    <%=link_to "Delete", post_path(@post), method: :delete, data: {confirm: "Are you sure?"} %>
+<%else%>
+    <%if @post.liked?(current_user)%>
+        <%=button_to "Like", like_path(@post), method: :post, disabled: true%>
+    <%else%>
+        <%=button_to "Like", like_path(@post), method: :post %>
+    <%end%>
+    <%=render "comment", comment: @comment%>
+<%end%>
+
+<br>
+<%@post.comments.each do |comment|%>
+    <ul>
+        <b><%=comment.user.name%></b>
+        <%=comment.body%>
+    </ul>
+<%end%>
+

@@ -27,11 +27,10 @@ class User < ApplicationRecord
   #who aren't friends already, or that don't have a pending request
   # scope :not_friends, ->(user.id){where(user.friends.id ).id)}
 
-
   has_many :posts
 
-
-
+  has_many :likes
+  has_many :comments
 end
 
   #friendship part 2
@@ -40,10 +39,4 @@ end
   # has_many :friends_as_a, ->(user){where("friends_a.id != ?", user.id)}, through: :friendships, source: "friend_a" 
   # # has_many :friends_as_b, through: :friendships, source: "friend_b"
   
-  # def friends
-  #   a = User.joins(:friendships).where.not(friendships: {friend_a_id: self.id })
-  #   b = User.joins(:friendships).where.not(frienships: {friend_b_id: self.id})
-  #   # User.where{#in friendships self.user == friend_a_id, grab friend_b_id}
-  #   # User.where{#in friendships self.user == friend_a_id, grab friend_b_id}
-  #   return a + b
-  # end
+ 
