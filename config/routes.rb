@@ -12,6 +12,8 @@ Rails.application.routes.draw do
     resource :profile
   end
 
+  resources :friend_requests, only: [:new, :create]
+
   # resources :users, only: [:show, :index]
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

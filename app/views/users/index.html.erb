@@ -1,3 +1,13 @@
 <h1>Where all friend_requests will go </h1>
+<%# so this will route to the create action of the friend request controller %>
 
+<%=form_with model: @friend_request, url: friend_requests_path, method: :post do |form| %> 
+    
+    <%@users.each do |user|%>
+        <%=user.name%>
+        <%=form.radio_button :reciever_id, user.id%>
+        <%# <%=form.hidden_field :reciever_id,%>
+    <%end%>
 
+    <%=form.submit%>
+<%end%>
