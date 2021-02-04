@@ -44,6 +44,10 @@ class PostsController < ApplicationController
         redirect_to root_path
     end
 
+    def like
+        @post = Post.find(params[:id])
+    end
+
     private
 
     def post_params
