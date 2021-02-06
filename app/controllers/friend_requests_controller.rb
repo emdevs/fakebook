@@ -1,7 +1,10 @@
 class FriendRequestsController < ApplicationController
-    # def new
-    #     @request = curent_user.sent_friend_requests.build
-    # end
+    #all possible people you can send requests to 
+    def index
+        @new_users = current_user.can_send_request
+        @pending_users = current_user.pending_invitees
+
+    end
 
     def create
         @request = current_user.sent_friend_requests.build(friend_request_params)
@@ -15,28 +18,26 @@ class FriendRequestsController < ApplicationController
         end      
     end
 
-    def destroy
-        @user = User.find(params[:id])
+    def update
+        @request = FriendRequest.find(params[:id])
 
-        @user.destroy
-        #flash msg?
-        redirect_to friend_requests_path 
+        @request.status = true
+        @request.save
+
+        redirect_to notifications_path
     end
 
-    #all possible people you can send requests to 
-    def index
-        @new_users = current_user.can_send_request
-        @pending_users = current_user.pending_invitees
+    def destroy
+        @request = FriendRequest.find(params[:id])
 
-
-        @friend_request = current_user.sent_friend_requests.build
-        #people to send requests to
-        #and people you already sent requests to (but are waiting for answer? greyed out send button?)
+        @request.destroy
+        #flash msg?
+        redirect_to friend_requests_path 
     end
 
     private
 
     def friend_request_params
-        params.require(:request).permit(:reciever_id)
+        params.permit(:reciever_id)
     end
 end

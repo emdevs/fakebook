@@ -16,11 +16,11 @@ class User < ApplicationRecord
     total_ids = ids_as_reciever + ids_as_requester
   end
 
-  def friends
-    User.where(id: self.friends_ids)
+  def friends?(user)
   end
 
-  def friends_with?(user)
+  def friends
+    User.where(id: self.friends_ids)
   end
 
   def can_send_request
@@ -37,6 +37,11 @@ class User < ApplicationRecord
 
   def pending_invitees
     ids = FriendRequest.where(requester_id: self.id, status: false).pluck(:reciever_id)
+    User.where(id: ids)
+  end
+
+  def invites_from
+    ids = FriendRequest.where(reciever_id: self.id, status: false).pluck(:requester_id)
     User.where(id: ids)
   end
 

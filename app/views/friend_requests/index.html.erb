@@ -4,17 +4,19 @@
 
 <%@pending_users.each do |user|%>
     <%=user.name%>
-    <%=button_to "Cancel", friend_request_path(user.id), method: :delete%>
+    <%invite = FriendRequest.where(requester_id: current_user.id, reciever_id: user.id, status: false).first%>
+    <%=button_to "Cancel", friend_request_path(invite.id), method: :delete%>
 
 <%end%>
 
-
-<h2>Users:</h2>
+<h2>Add Users:</h2>
 <%@new_users.each do |user|%>
     <%=user.name%>
     <%# fix this %>
-    <%=link_to "View Profile", user_profile_url(user.id, 1)%>
+    <%=link_to "View Profile", user_profile_url(user.id)%>
     <%# need to send user_id as parameter to friend_request#Create %>
     <%# make params sent not visible in url, its usper ugly %>
-    <%=button_to "Invite", friend_requests_path, params: {'request[reciever_id]' => user.id}, method: :post %>
+    <%=button_to "Invite", friend_requests_path(reciever_id: user.id), method: :post %>
 <%end%>
+
+<%# params: {'request[reciever_id]' => user.id} %>

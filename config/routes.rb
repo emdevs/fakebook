@@ -12,11 +12,13 @@ Rails.application.routes.draw do
     resource :profile, only: [:edit, :show]
   end
 
-  resources :friend_requests, only: [:new, :create, :index, :destroy]
+  resources :friend_requests, only: [:new, :create, :index, :destroy, :update]
 
   post "/posts/:id/like", to: "posts#like", as: "like"
 
   resources :comments, only: [:new, :create, :destroy]
+
+  resources :notifications, only: [:index, :show]
 
   # resources :users, only: [:show, :index]
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
