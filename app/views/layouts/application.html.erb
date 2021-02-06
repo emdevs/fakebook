@@ -16,11 +16,13 @@
 
     <div class="topnav">
       <%if current_user != nil%>
-        <%=link_to "Logout", destroy_user_session_path, method: :delete%>
-        <%=link_to "Profile", user_profile_url(current_user.id) %> 
+        
         <%=link_to "Homepage", root_path %>
+        <%=link_to "Profile", user_profile_url(current_user.id) %> 
         <%=link_to "Create New Post", new_post_path %>
         <%=link_to "Manage Friends", users_path%>
+        <%=link_to "Notifications"%>
+        <%=link_to "Logout", destroy_user_session_path, method: :delete%>
       <%end%>
     </div>
     

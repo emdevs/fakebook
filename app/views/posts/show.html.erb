@@ -11,19 +11,23 @@
     <%=link_to "Edit", edit_post_path(@post)%>
     <%=link_to "Delete", post_path(@post), method: :delete, data: {confirm: "Are you sure?"} %>
 <%else%>
-    <%if @post.liked?(current_user)%>
-        <%=button_to "Like", like_path(@post), method: :post, disabled: true%>
-    <%else%>
-        <%=button_to "Like", like_path(@post), method: :post %>
-    <%end%>
-    <%=render "comment", comment: @comment%>
+    <%has_liked = @post.liked?(current_user)? true : false %>
+    <%=button_to "Like", like_path(@post), method: :post, disabled: has_liked%>
 <%end%>
 
 <br>
+<%# need to specificy posts/comment form because if post doesnt save, this form has to be re-rendered along with this post hsow page %>
+<%=render "/posts/comment_form", comment: @comment%>
+
 <%@post.comments.each do |comment|%>
     <ul>
-        <b><%=comment.user.name%></b>
+        <b><%=comment.user.name%> </b>
+        <i><%=comment.date%></i>
+        <br>
         <%=comment.body%>
+        <%if current_user.id == comment.user_id%>
+            <%=link_to "delete", comment_path(comment), method: :delete,data: {confirm: "Are you sure?"}%>
+        <%end%>
     </ul>
 <%end%>
 

@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     resource :profile, only: [:edit, :show]
   end
 
-  resources :friend_requests, only: [:new, :create]
+  resources :friend_requests, only: [:new, :create, :index]
 
   post "/posts/:id/like", to: "posts#like", as: "like"
 

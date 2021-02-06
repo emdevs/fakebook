@@ -1,21 +1,26 @@
 class CommentsController < ApplicationController
-    def new
+    def new #not really needed actually, can only create comment from inside posts contorller show
     end
 
     def create
-
-        #comment isnt being created
         @comment = current_user.comments.build(comment_params)
 
         if @comment.save
-            #how to get post_id? redirec tnot working
-            redirect_to post_path(@post.id)
+            #flash msg comment created?
+            redirect_to post_path(@comment.post_id)
         else
-            redirect_to root_path
+            #how to render errors for a form partial in another controllers view with the url of post#show
+            # @post = Post.find(@comment.post_id)
+            # render "posts/_comment_form", comment: @comment
         end
     end
 
     def destroy
+        @comment = Comment.find(params[:id])
+
+        @comment.destroy
+        #flash msg destroy successful?
+        redirect_to post_path(@comment.post_id)
     end
 
     private

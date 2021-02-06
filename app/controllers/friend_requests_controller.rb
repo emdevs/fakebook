@@ -16,6 +16,11 @@ class FriendRequestsController < ApplicationController
     def delete
     end
 
+    #all possible people you can send requests to 
+    def index
+        @users = current_user.can_send_request
+    end
+
     private
 
     def friend_request_params
