@@ -1,0 +1,20 @@
+<h1>Friend Requests Page</h1>
+
+<h2>Sent Requests: </h2>
+
+<%@pending_users.each do |user|%>
+    <%=user.name%>
+    <%=button_to "Cancel", friend_request_path(user.id), method: :delete%>
+
+<%end%>
+
+
+<h2>Users:</h2>
+<%@new_users.each do |user|%>
+    <%=user.name%>
+    <%# fix this %>
+    <%=link_to "View Profile", user_profile_url(user.id, 1)%>
+    <%# need to send user_id as parameter to friend_request#Create %>
+    <%# make params sent not visible in url, its usper ugly %>
+    <%=button_to "Invite", friend_requests_path, params: {'request[reciever_id]' => user.id}, method: :post %>
+<%end%>

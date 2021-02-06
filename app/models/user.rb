@@ -35,6 +35,11 @@ class User < ApplicationRecord
     User.where.not(id: all_ids)
   end
 
+  def pending_invitees
+    ids = FriendRequest.where(requester_id: self.id, status: false).pluck(:reciever_id)
+    User.where(id: ids)
+  end
+
   has_many :posts
   has_many :likes
   has_many :comments
