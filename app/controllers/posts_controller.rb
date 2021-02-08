@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
-    def index #timeline feature
-        @posts = Post.all
-        #only posts of signed in author and their friends
+    def index #timeline feature: only your own and friends posts
+        ids = [current_user.id] + current_user.friends_ids
+        @posts = Post.where(user_id: ids).order('created_at DESC')
     end
 
     def show
