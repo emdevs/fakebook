@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
   root "posts#index"
 
-  resources :users, only: [:index] do
+  resources :users, only: [:index, :edit, :update] do
     resource :profile, only: [:edit, :show]
   end
 
@@ -20,6 +20,7 @@ Rails.application.routes.draw do
 
   resources :notifications, only: [:index, :show]
 
+  
   # resources :users, only: [:show, :index]
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
