@@ -4,6 +4,6 @@ class ProfilesController < ApplicationController
     end
 
     def edit
-        
+        @user = User.find(id: current_user.id)
     end
 end

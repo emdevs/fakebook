@@ -5,6 +5,7 @@ class User < ApplicationRecord
           :recoverable, :rememberable, :validatable
 
   validates :name, length: {minimum: 2}
+  has_one_attached :profile_pic
 
   #Friend Requests (true = accepted, false = pending, rejected means request is auto-deleted)
   has_many :sent_friend_requests, foreign_key: "requester_id", class_name: "FriendRequest"
