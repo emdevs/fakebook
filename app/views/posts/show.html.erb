@@ -15,9 +15,9 @@
     <%=button_to "Like", like_path(@post), method: :post, disabled: has_liked%>
 <%end%>
 
-<br>
-<%# need to specificy posts/comment form because if post doesnt save, this form has to be re-rendered along with this post hsow page %>
-<%=render "/posts/comment_form", comment: @comment%>
+<br><br>
+
+<%=render "/posts/comment_form", comment: @comment %>
 
 <%@post.comments.each do |comment|%>
     <ul>
