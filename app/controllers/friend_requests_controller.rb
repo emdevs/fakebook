@@ -10,10 +10,10 @@ class FriendRequestsController < ApplicationController
         @request = current_user.sent_friend_requests.build(friend_request_params)
 
         if @request.save
-            #friend equest sent!
+            flash[:alert] = "Friend request sent!"
             redirect_to friend_requests_path
         else
-            #error message?
+            flash[:alert] = "There was an error, friend request not sent."
             redirect_to friend_requests_path
         end      
     end
@@ -31,7 +31,8 @@ class FriendRequestsController < ApplicationController
         @request = FriendRequest.find(params[:id])
 
         @request.destroy
-        #flash msg?
+        
+        flash[:alert] = "Friend request cancelled."
         redirect_to friend_requests_path 
     end
 
