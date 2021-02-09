@@ -19,7 +19,7 @@ class PostsController < ApplicationController
         @post = current_user.posts.build(post_params)
 
         if @post.save
-            #flash msg, successfully created?
+            flash[:alert] = "Post successfully created."
             redirect_to @post
         else
             render :new
@@ -34,7 +34,7 @@ class PostsController < ApplicationController
         @post = Post.find(params[:id])
 
         if @post.update(post_params)
-            #flash msg, successfully updated?
+            flash[:alert] = "Post succesfully saved."
             redirect_to @post
         else
             render :edit
