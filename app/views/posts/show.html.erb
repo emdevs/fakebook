@@ -1,4 +1,9 @@
 <h1><%=@post.title%></h1>
+
+<%if @post.image.attached?%>
+    <img class="post-img" src="<%=url_for(@post.image)%>">
+<%end%>
+
 <div>
     <%=@post.body%><br>
 
@@ -19,8 +24,9 @@
 
 <%=render "comment_form", comment: @comment %>
 
+
 <%@post.comments.each do |comment|%>
-    <ul>
+    <div>
         <b><%=comment.user.name%> </b>
         <i><%=comment.date%></i>
         <br>
@@ -28,6 +34,7 @@
         <%if current_user.id == comment.user_id%>
             <%=link_to "delete", comment_path(comment), method: :delete,data: {confirm: "Are you sure?"}%>
         <%end%>
-    </ul>
+    </div>
 <%end%>
+
 
