@@ -10,16 +10,16 @@ class CommentsController < ApplicationController
             redirect_to post_path(@comment.post_id)
         else
             #how to render errors for a form partial in another controllers view with the url of post#show
-            # @post = Post.find(@comment.post_id)
-            # render "posts/_comment_form", comment: @comment
+            flash[:alert] = @comment.errors.full_messages
+            redirect_to post_path(@comment.post_id)
+
         end
     end
 
     def destroy
         @comment = Comment.find(params[:id])
-
         @comment.destroy
-        #flash msg destroy successful?
+        flash[:alert] = "Comment successfully deleted"
         redirect_to post_path(@comment.post_id)
     end
 
