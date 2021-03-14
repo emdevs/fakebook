@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   resources :friend_requests, only: [:new, :create, :index, :destroy, :update]
 
   post "/posts/:id/like", to: "posts#like", as: "like"
+  delete "/posts/:id/like", to: "posts#unlike", as: "unlike"
 
   resources :comments, only: [:new, :create, :destroy]
 
