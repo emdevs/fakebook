@@ -4,6 +4,10 @@
 <%@posts.each do |post|%>
     <div>
         <b><%=post.title%></b><br>
+        <% if post.image.attached?%>
+            <img class = post-pic src= "<%=url_for(post.image)%>">
+        <%end%><br>
+
         <%=post.body%>
 
         <p>Likes: <%=post.likes.count%></p>
