@@ -7,7 +7,6 @@ class User < ApplicationRecord
   devise :omniauthable, omniauth_providers: %i[facebook]
 
   validates :name, length: {minimum: 2}
-  has_one_attached :profile_pic
   after_create :create_profile
 
 

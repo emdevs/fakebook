@@ -5,8 +5,3 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-
-
-friendships = Friendship.create([
-    {"friend_a_id": 1, "friend_b_id": 2}
-])

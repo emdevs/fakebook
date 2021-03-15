@@ -1,19 +1,18 @@
 <h1>Profile</h1>
 
-<%if @user.profile_pic.attached?%>
-    <img class = profile-pic src= "<%=url_for(@user.profile_pic)%>">
-<%end%>
+<%# add profile pic %>
 
 <h2>Name: </h2>
-<%=current_user.name%>
+<%=@user.name%>
 
 <h2>Email: </h2>
-<%=current_user.email%>
+<%=@user.email%>
 
 <h2>Bio:</h2>
-<p><%=current_user.profile.bio%></p>
+<p><%=@user.profile.bio%></p>
 
 
-<%=link_to "Edit Settings", edit_registration_path(current_user)%>
-
-<%=link_to "Edit Profile", edit_user_profile_path(current_user) %>
+<%if current_user.id == @user.id%>
+    <%=link_to "Edit Settings", edit_registration_path(current_user)%>
+    <%=link_to "Edit Profile", edit_user_profile_path(current_user) %>
+<%end%>
