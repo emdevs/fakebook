@@ -3,7 +3,6 @@ class FriendRequestsController < ApplicationController
     def index
         @new_users = current_user.can_send_request
         @pending_users = current_user.pending_invitees
-
     end
 
     def create
