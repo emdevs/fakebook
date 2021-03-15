@@ -1,0 +1,10 @@
+<%=form_with model: profile, url: user_profile_path, method: "patch" do |form|%>
+    <%=form.label :bio%>
+    <%=form.text_field :bio%><br>
+
+    <%=form.label :birthday%>
+    <%=form.date_field :birthday%>
+
+    <br>
+    <%=form.submit%>
+<%end%>

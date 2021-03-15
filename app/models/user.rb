@@ -8,6 +8,8 @@ class User < ApplicationRecord
 
   validates :name, length: {minimum: 2}
   has_one_attached :profile_pic
+  after_create :create_profile
+
 
   #Friend Requests (true = accepted, false = pending, rejected means request is auto-deleted)
   has_many :sent_friend_requests, foreign_key: "requester_id", class_name: "FriendRequest"
@@ -51,6 +53,7 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :comments, dependent: :destroy
+  has_one :profile, dependent: :destroy
 
 
   def self.from_omniauth(auth)
@@ -69,5 +72,11 @@ class User < ApplicationRecord
         user.email = data["email"] if user.email.blank?
       end
     end
+  end
+
+  private
+
+  def create_profile
+    Profile.create(user: self)
   end
 end

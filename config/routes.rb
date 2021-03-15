@@ -9,8 +9,9 @@ Rails.application.routes.draw do
   root "posts#index"
 
   resources :users, only: [:index, :edit, :update] do
-    resource :profile, only: [:show]
+    resource :profile, only: [:show, :edit, :update]
   end
+
 
   resources :friend_requests, only: [:new, :create, :index, :destroy, :update]
 
