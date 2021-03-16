@@ -3,12 +3,13 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
           :recoverable, :rememberable, :validatable
-
   devise :omniauthable, omniauth_providers: %i[facebook]
 
   validates :name, length: {minimum: 2}
+  # validates :gender, presence: true (FB signup will fail since cannot retrieve gender (for now, it returns nil))
   after_create :create_profile
 
+  enum gender: [:male, :female, :other]
 
   #Friend Requests (true = accepted, false = pending, rejected means request is auto-deleted)
   has_many :sent_friend_requests, foreign_key: "requester_id", class_name: "FriendRequest"
@@ -31,12 +32,12 @@ class User < ApplicationRecord
     #All user ids that fail conditions (to be sent a new friend_request) below
     a = FriendRequest.where(requester_id: self.id, status: false).pluck(:reciever_id)
     b = FriendRequest.where(reciever_id: self.id, status: false).pluck(:requester_id)
-    c = self.friends_ids
-    d = self.id
+    # c = self.friends_ids
+    # d = self.id
 
-    all_ids = a+b+c
-    all_ids << self.id
-    User.where.not(id: all_ids)
+    # all_ids = a+b+c
+    # all_ids << self.id
+    User.where.not(id: [a+b+self.friends_ids+[self.id]])
   end
 
   def pending_invitees
@@ -55,13 +56,29 @@ class User < ApplicationRecord
   has_one :profile, dependent: :destroy
 
 
+  # def self.from_omniauth(auth)
+  #   where(email: auth.info.email).first_or_initialize.tap do |user|
+  #     user.email = auth.info.email
+  #     user.password = Devise.friendly_token[0,20]
+  #     user.name = auth.info.name
+  #     # user.gender = auth.extra.raw_info.gender
+  #     # user.profile_pic = auth.info.image
+  #     user.save
+  #   end
+  # end
+
+  #currently need to find a way to link fb info (gender/date of birth) to user model, might be dependent on user privacy
+
   def self.from_omniauth(auth)
-    where(email: auth.info.email).first_or_initialize.tap do |user|
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email
-      user.password = Devise.friendly_token[0,20]
+      user.password = Devise.friendly_token[0, 20]
       user.name = auth.info.name
-      # user.profile_pic = auth.info.image
-      user.save
+      user.gender = auth.extra.raw_info.gender  # assuming the user model has a name
+      # user.image = auth.info.image # assuming the user model has an image
+      # If you are using confirmable and the provider(s) you use validate emails, 
+      # uncomment the line below to skip the confirmation emails.
+      # user.skip_confirmation!
     end
   end
 
