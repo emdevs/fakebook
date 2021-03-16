@@ -2,6 +2,7 @@ class FriendRequestsController < ApplicationController
     #all possible people you can send requests to 
     def index
         @new_users = current_user.can_send_request
+        #@pending_user = 
         @pending_users = current_user.pending_invitees
     end
 

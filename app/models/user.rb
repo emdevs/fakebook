@@ -10,6 +10,10 @@ class User < ApplicationRecord
   after_create :create_profile
 
   enum gender: [:male, :female, :other]
+  has_many :posts, dependent: :destroy
+  has_many :likes, dependent: :destroy
+  has_many :comments, dependent: :destroy
+  has_one :profile, dependent: :destroy
 
   #Friend Requests (true = accepted, false = pending, rejected means request is auto-deleted)
   has_many :sent_friend_requests, foreign_key: "requester_id", class_name: "FriendRequest"
@@ -29,14 +33,8 @@ class User < ApplicationRecord
   end
 
   def can_send_request
-    #All user ids that fail conditions (to be sent a new friend_request) below
     a = FriendRequest.where(requester_id: self.id, status: false).pluck(:reciever_id)
     b = FriendRequest.where(reciever_id: self.id, status: false).pluck(:requester_id)
-    # c = self.friends_ids
-    # d = self.id
-
-    # all_ids = a+b+c
-    # all_ids << self.id
     User.where.not(id: [a+b+self.friends_ids+[self.id]])
   end
 
@@ -49,12 +47,6 @@ class User < ApplicationRecord
     ids = FriendRequest.where(reciever_id: self.id, status: false).pluck(:requester_id)
     User.where(id: ids)
   end
-
-  has_many :posts, dependent: :destroy
-  has_many :likes, dependent: :destroy
-  has_many :comments, dependent: :destroy
-  has_one :profile, dependent: :destroy
-
 
   # def self.from_omniauth(auth)
   #   where(email: auth.info.email).first_or_initialize.tap do |user|
