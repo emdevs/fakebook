@@ -72,9 +72,6 @@ class User < ApplicationRecord
   #     user.save
   #   end
   # end
-
-  #need to do app review to access other fb info like gender and bithday lol
-  #gender and bday will currently return nil.
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email
@@ -86,7 +83,7 @@ class User < ApplicationRecord
         #default bday value (1st Jan, 18 years old)  if fb bday can't be retrieved
         user.birth_date = Date.strptime("#{DateTime.now.year-18}/01/01", "%Y/%m/%d")
       else
-        user.birth_date = Date.strptime(auth.extra.raw_info.birthday,'%Y/%m/%d')
+        user.birth_date = auth.extra.raw_info.birthday
       end
       # assuming the user model has a name
       # user.image = auth.info.image # assuming the user model has an image
