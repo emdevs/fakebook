@@ -12,11 +12,13 @@ Rails.application.routes.draw do
     resource :profile, only: [:show, :edit, :update]
   end
 
-
   resources :friend_requests, only: [:new, :create, :index, :destroy, :update]
 
-  post "/posts/:id/like", to: "posts#like", as: "like"
-  delete "/posts/:id/like", to: "posts#unlike", as: "unlike"
+  post "/posts/:id/like", to: "posts#like", as: "like_post"
+  delete "/posts/:id/like", to: "posts#unlike", as: "unlike_post"
+
+  post "/posts/:id/comments/:comment_id/like", to: "comments#like", as: "like_comment"
+  delete "/posts/:id/comments/:comment_id/like", to: "comments#unlike", as: "unlike_comment"
 
   resources :comments, only: [:new, :create, :destroy]
 

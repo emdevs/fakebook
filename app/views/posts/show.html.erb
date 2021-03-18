@@ -16,28 +16,33 @@
     <%=link_to "Edit", edit_post_path(@post)%>
     <%=link_to "Delete", post_path(@post), method: :delete, data: {confirm: "Are you sure?"} %>
 <%else%>
-    <%# <%has_liked = @post.liked?(current_user)? true : false %>
-    <%# <%=button_to "Like", like_path(@post), method: :post, disabled: has_liked%> 
     <%if @post.liked?(current_user) %>
-        <%=button_to "Unlike", unlike_path, method: :delete %>
+        <%=button_to "Unlike", unlike_post_path, method: :delete %>
     <%else%>
-        <%=button_to "Like", like_path, method: :post%>
+        <%=button_to "Like", like_post_path, method: :post%>
     <%end%>
 <%end%>
 
 <br><br>
 
 <%=render "comment_form", comment: @comment %>
-
-
+<%# 
+check if post is deleted, likes on comments deleted aswell %>
 <%@post.comments.each do |comment|%>
     <div>
         <b><%=comment.user.name%> </b>
         <i><%=comment.date%></i>
-        <br>
+        <p>Likes: <%=comment.likes.count%></p>
         <%=comment.body%>
+        <br>
         <%if current_user.id == comment.user_id%>
-            <%=link_to "delete", comment_path(comment), method: :delete,data: {confirm: "Are you sure?"}%>
+            <%=link_to "Delete", comment_path(comment), method: :delete,data: {confirm: "Are you sure?"}%>
+        <%else%>
+            <%if comment.liked?(current_user) %>
+                <%=button_to "Unlike", unlike_comment_path(id: @post.id, comment_id: comment.id), method: :delete %>
+            <%else%>
+                <%=button_to "Like", like_comment_path(id: @post.id, comment_id: comment.id), method: :post%>
+            <%end%>
         <%end%>
     </div>
 <%end%>

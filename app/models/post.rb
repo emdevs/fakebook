@@ -6,7 +6,7 @@ class Post < ApplicationRecord
     has_one_attached :image
 
     has_many :comments, dependent: :destroy
-    has_many :likes, dependent: :destroy
+    has_many :likes, :as => :likeable, dependent: :destroy
 
     #make sure a user can only like ONCE on a post
     def liked?(user)

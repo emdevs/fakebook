@@ -77,6 +77,7 @@ class User < ApplicationRecord
       user.email = auth.info.email
       user.password = Devise.friendly_token[0, 20]
       user.name = auth.info.name
+      #if fb gender is something other than male/female, need to set it to :other
       user.gender = auth.extra.raw_info.gender
 
       if auth.extra.raw_info.birthday.nil?
