@@ -12,7 +12,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     super
-    UserMailer.welcome_email(params).deliver_now!
+    #if a user was created (checks if the unique email is in db); 
+    unless User.find_by(email: params[:user][:email]).nil?
+      UserMailer.welcome_email(params).deliver_now!
+    end
   end
 
   # GET /resource/edit
