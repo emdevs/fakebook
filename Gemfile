@@ -65,3 +65,5 @@ gem 'omniauth-facebook'
 gem 'omniauth-rails_csrf_protection'
 
 gem 'figaro'
+
+gem "bulma-rails", "~> 0.0.4"

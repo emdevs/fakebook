@@ -1,4 +1,4 @@
 class Profile < ApplicationRecord
-    #add validations for birthday 
+    #attach profile pic
     belongs_to :user
 end

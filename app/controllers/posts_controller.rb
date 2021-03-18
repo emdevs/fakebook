@@ -43,6 +43,7 @@ class PostsController < ApplicationController
 
     def destroy
         @post = Post.find(params[:id])
+        @post.image.purge
         @post.destroy
 
         redirect_to root_path
