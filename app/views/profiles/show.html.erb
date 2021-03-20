@@ -1,6 +1,8 @@
 <h1>Profile</h1>
 
-<%# add profile pic %>
+<%if @profile.profile_pic.attached?%>
+    <img class="profile-pic" src="<%=url_for(@profile.profile_pic)%>">
+<%end%>
 
 <h2>Name: </h2>
 <%=@user.name%>

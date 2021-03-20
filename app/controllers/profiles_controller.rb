@@ -1,6 +1,7 @@
 class ProfilesController < ApplicationController
     def show
         @user = User.find(params[:user_id])
+        @profile = Profile.find_by(user_id: @user.id)
     end
 
     def edit
@@ -21,7 +22,7 @@ class ProfilesController < ApplicationController
     private
 
     def profile_params
-        params.require(:profile).permit(:bio, :birthday)
+        params.require(:profile).permit(:bio, :profile_pic)
     end
 end
 
