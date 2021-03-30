@@ -12,4 +12,9 @@ class Post < ApplicationRecord
     def liked?(user)
         self.likes.find{|like| like.user_id == user.id}
     end
+
+    #time created is..wrong??
+    def date
+        self.created_at.strftime("%d-%m-%Y %H:%M")
+    end
 end
