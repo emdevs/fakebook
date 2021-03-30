@@ -2,7 +2,29 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
-.profile-pic {
-    max-width: 100px;
-    max-height: 100px
+#profile {
+    min-width: 600px;
+    max-width: 700px;
+    border-radius: 5px;
+
+    .profile-pic {
+        max-width: 180px;
+        max-height: 180px;
+        border-radius: 50%; 
+
+        &:hover {
+            transform: scale(1.05);
+            transition: transform .15s;
+        }
+    }
+}
+
+
+
+
+@media only screen and (max-width: 768px) {
+    #profile {
+        max-width: 90%;
+        min-width: none;
+    }
 }

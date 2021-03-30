@@ -12,8 +12,16 @@
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    <%if notice%>
+      <p class="notice alert-success m-0"><%= notice %></p>
+    <%end%>
+    <%if alert%>
+      <p class="alert alert-primary m-0"><%= alert %></p>
+    <%end%>
+
+    <div class="mt-0 jumbotron jumbotron-fluid main-color">
+      <h1>Fakebook</h1>
+    </div>
 
     <div class="topnav">
       <%if current_user != nil%>

@@ -1,3 +1,23 @@
 // Place all the styles related to the posts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+#post {
+    min-width: 700px;
+}
+
+.post {
+    // background-color: white;
+}
+
+
+.comment {
+    background-color: rgb(241, 241, 241);
+}
+
+
+@media only screen and (max-width: 768px) {
+    #post {
+        min-width: 80%;
+    }
+}

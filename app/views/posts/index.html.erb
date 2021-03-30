@@ -1,8 +1,7 @@
 <h1>Homepage</h1>
-<p>display user and friends posts <p>
 
 <%@posts.each do |post|%>
-    <div>
+    <div class="post">
         <b><%=post.title%></b><br>
         <% if post.image.attached?%>
             <img class = post-pic src= "<%=url_for(post.image)%>">
