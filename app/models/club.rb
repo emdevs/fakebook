@@ -17,7 +17,7 @@ class Club < ApplicationRecord
 
     has_many :memberships
     has_many :members, through: :memberships
-    # has_many :posts
+    has_many :posts, as: :postable
 
     #find a way to add posting ability to clubs.
 

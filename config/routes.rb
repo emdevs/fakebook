@@ -20,7 +20,10 @@ Rails.application.routes.draw do
 
   # get "/homepage", to: "posts#index"
 
-  root "posts#index"
+  resource :wall, only: :index
+  root "walls#index"
+
+  # root "posts#index"
 
   resources :users, only: [:index, :edit, :update] do
     resource :profile, only: [:show, :edit, :update]

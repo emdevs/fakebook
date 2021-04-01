@@ -1,8 +1,10 @@
 class PostsController < ApplicationController
-    def index #timeline feature: only your own and friends posts
-        ids = [current_user.id] + current_user.friends_ids
-        @posts = Post.where(user_id: ids).order('created_at DESC')
-    end
+    # def index #timeline feature: only your own and friends posts
+    #     ids = [current_user.id] + current_user.friends_ids
+    #     @posts = Post.where(user_id: ids).order('created_at DESC')
+    # end
+
+    #Need to update this page to accomodate club.posts.build and wall.posts.build
 
     def show
         @post = Post.find(params[:id])

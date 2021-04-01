@@ -2,9 +2,11 @@ class Post < ApplicationRecord
     validates :title, presence: true, length: {minimum: 5}
     validates :body, presence: true, length: {minimum: 10}
 
-    #post can belong to user, and belong to group (if any). if group is none, post to homepage
     belongs_to :user
-    # belongs_to :club, optional: true
+    #make post polymorphic! (can belong to either wall or club)
+    belongs_to :postable, polymorphic: true
+
+
 
     has_one_attached :image
 
