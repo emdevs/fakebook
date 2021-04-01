@@ -1,0 +1,30 @@
+<h1>INDEX CLUB PAGES</h1>
+<%# <p>This will list all clubs</h1> %>
+
+<%=link_to "Create Club", new_club_path%>
+
+
+<%@clubs.each do |club|%>
+    <div>   
+        <p><%=club.name%></p>
+        <p><%=club.description%></p>
+        <p>Owned by: <%=club.owner.name%></p>
+        <p>Member count: <%="#{club.members.count}/#{club.capacity}"%></p>
+
+        <div class="links">
+            <%=link_to "View club", club_path(club)%>
+
+            <%# display diff buttons based on if member or not (OFC there must be database validations too, NO CREATING ADDITIONAL MEMBERSHIP IF CLUBID/MEMBERID EXISTS)%>
+            <%if club.member?(current_user.id)%>
+                <%id = Membership.find_by(club_id: club.id, member_id: current_user.id).id%>
+                <%=button_to "Leave club", membership_path(id), method: :delete%>
+            <%else%>
+                <%=button_to "Join club", memberships_path(club_id: club.id), method: :post%>
+            <%end%>
+        </div>
+    </div>
+<%end%>
+
+
+
+<p>example</p>

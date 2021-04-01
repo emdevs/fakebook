@@ -1,0 +1,33 @@
+<p>Club main page. If you want to view this club page, need to be a member.</p>
+<p>Probably two column layout, posts one col, members another</p>
+
+<%if @club.owner.id == current_user.id%>
+    <%# make sure that if someone enters edit club in url, person will not be able to edit club %>
+    <%=link_to "Edit Club", edit_club_path(@club)%>
+<%end%>
+
+
+<%# find a way to transfer info of membership id to destroy %>
+<%=link_to "Leave Club", memberships_path(), method: :delete%>
+
+
+
+
+<br><br>
+
+<%=@club.owner.name%>
+
+<%=@club.name%><br>
+<%=@club.description%><br>
+<p>Member count: <%="#{@club.member_count}/#{@club.capacity}"%></p>
+
+<br>
+<%# <%=link_to "Add post", new_post_path(post: club.build.posts)%> 
+<br>
+
+<h2>Members!</h2>
+<%@club.members.each do |member|%>
+    <p><%=member.name%></p>
+<%end%>
+
+<%# show case all posts in this club here %>

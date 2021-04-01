@@ -2,6 +2,20 @@ Rails.application.routes.draw do
   devise_for :users,controllers: { registrations: 'users/registrations', omniauth_callbacks: 'users/omniauth_callbacks' }
 
   resources :posts
+  
+  #for now
+  resources :clubs
+  # namespace :clubs do
+  #   resources :posts
+  # end
+
+
+  # resources :clubs do
+  #   resources :posts
+  # end
+
+  resources :memberships
+
   # root "/homepage"
 
   # get "/homepage", to: "posts#index"

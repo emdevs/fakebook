@@ -1,0 +1,20 @@
+<%# dont forget to add form errors later %>
+
+<%=form_with model: club do |form|%>
+    <%=form.label :name%>
+    <%=form.text_field :name%><br>
+    <%=club.errors[:name]%>
+
+    <%=form.label :description%>
+    <%=form.text_field :description%>
+    <%=club.errors[:description]%>
+
+    <%=form.label :capacity%>
+    <%=form.number_field :capacity%>
+    <%=club.errors[:capacity]%>
+
+    <%=form.hidden_field :owner_id, value: current_user.id%>
+
+    <br>
+    <%=form.submit%>
+<%end%>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_17_184826) do
+ActiveRecord::Schema.define(version: 2021_03_31_115919) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,15 @@ ActiveRecord::Schema.define(version: 2021_03_17_184826) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "clubs", force: :cascade do |t|
+    t.integer "owner_id"
+    t.string "name"
+    t.string "description"
+    t.integer "capacity"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "comments", force: :cascade do |t|
     t.integer "user_id"
     t.text "body"
@@ -71,6 +80,15 @@ ActiveRecord::Schema.define(version: 2021_03_17_184826) do
     t.index ["likeable_type", "likeable_id"], name: "index_likes_on_likeable_type_and_likeable_id"
     t.index ["user_id", "likeable_id", "likeable_type"], name: "index_likes_on_user_id_and_likeable_id_and_likeable_type", unique: true
     t.index ["user_id"], name: "index_likes_on_user_id"
+  end
+
+  create_table "memberships", force: :cascade do |t|
+    t.integer "club_id"
+    t.integer "member_id"
+    t.boolean "blocked", default: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["club_id", "member_id"], name: "index_memberships_on_club_id_and_member_id", unique: true
   end
 
   create_table "posts", force: :cascade do |t|
