@@ -1,7 +1,6 @@
 class Like < ApplicationRecord
   #given post_id, user_id is unique
-
-  #THIS VALIDATION IS WRONG, 
+  #make sure that user cannot like own post (in model)
   validates :user_id, uniqueness: {scope: [:likeable_id, :likeable_type]}
   # validates :user_id, uniqueness: {scope: :likeable_id}
 

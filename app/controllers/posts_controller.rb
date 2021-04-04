@@ -1,28 +1,23 @@
 class PostsController < ApplicationController
-    # def index #timeline feature: only your own and friends posts
-    #     ids = [current_user.id] + current_user.friends_ids
-    #     @posts = Post.where(user_id: ids).order('created_at DESC')
-    # end
-
-    #Need to update this page to accomodate club.posts.build and wall.posts.build
+    before_action :load_postable
 
     def show
         @post = Post.find(params[:id])
-
         #generate new comment obj, for "new comment form" in post#show
-        @comment = current_user.comments.build
+        # @comment = current_user.comments.build
     end
 
     def new
-        @post = Post.new
+        @post = @postable.posts.new
     end
 
     def create
-        @post = current_user.posts.build(post_params)
+        @post = @postable.posts.build(post_params)
+        @post.user = current_user
 
         if @post.save
             flash[:alert] = "Post successfully created."
-            redirect_to @post
+            redirect_to [@postable_name, :posts]
         else
             render :new
         end
@@ -37,7 +32,7 @@ class PostsController < ApplicationController
 
         if @post.update(post_params)
             flash[:alert] = "Post succesfully saved."
-            redirect_to @post
+            redirect_to [@postable_name, @post]
         else
             render :edit
         end
@@ -48,7 +43,7 @@ class PostsController < ApplicationController
         @post.image.purge
         @post.destroy
 
-        redirect_to root_path
+        redirect_to [@postable_name, :posts]
     end
 
     def like
@@ -63,10 +58,16 @@ class PostsController < ApplicationController
         redirect_to @post
     end
 
-    private
+    protected
+
+    def load_postable
+        resource, id = request.path.split("/")[1,2]
+        @postable = resource.singularize.classify.constantize.find(id)
+        #specifically for routes.
+        @postable_name = @postable
+    end
 
     def post_params
         params.require(:post).permit(:title, :body, :image)
     end
-
 end

@@ -1,29 +1,18 @@
 Rails.application.routes.draw do
   devise_for :users,controllers: { registrations: 'users/registrations', omniauth_callbacks: 'users/omniauth_callbacks' }
 
-  resources :posts
-  
+  root to: "walls/posts#index"
+
   #for now
-  resources :clubs
-  # namespace :clubs do
-  #   resources :posts
-  # end
+  resources :clubs do
+    resources :posts, module: :clubs
+  end
 
-
-  # resources :clubs do
-  #   resources :posts
-  # end
+  resource :wall do 
+    resources :posts, module: :walls
+  end
 
   resources :memberships
-
-  # root "/homepage"
-
-  # get "/homepage", to: "posts#index"
-
-  resource :wall, only: :index
-  root "walls#index"
-
-  # root "posts#index"
 
   resources :users, only: [:index, :edit, :update] do
     resource :profile, only: [:show, :edit, :update]

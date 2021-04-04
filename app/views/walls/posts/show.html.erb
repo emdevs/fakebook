@@ -1,0 +1,55 @@
+<%# <%=render "posts/show_partial">???? might have to use @postable_name instead of @postable tho%>
+
+<div id="post-container" class="d-flex justify-content-center">
+    <div id="post" class="bg-light d-flex flex-column mt-5 p-3">
+        <h1><%=@post.title%></h1>
+
+        <%if @post.image.attached?%>
+            <img class="post-img" src="<%=url_for(@post.image)%>">
+        <%end%>
+
+        <div>
+            <%=@post.body%>
+            <p>Likes: <%=@post.likes.count%></p>
+        </div>
+
+        <%if current_user.id == @post.user_id%>
+            <div class="links">
+                <%=link_to "Edit", edit_wall_post_path(@post)%>
+                <%=link_to "Delete", wall_post_path(@post), method: :delete, data: {confirm: "Are you sure?"}%>
+                <%# <%=link_to "Edit", edit_post_path(@post)%>
+                <%# <%=link_to "Delete", post_path(@post), method: :delete, data: {confirm: "Are you sure?"} %> %> %>
+            </div>
+        <%else%>
+            <%if @post.liked?(current_user) %>
+                <%=button_to "Unlike", unlike_post_path, method: :delete %>
+            <%else%>
+                <%=button_to "Like", like_post_path, method: :post%>
+            <%end%>
+        <%end%>
+
+        <%# <%=render "comment_form", comment: @comment %> %>
+        <%# 
+        check if post is deleted, likes on comments deleted aswell %>
+        <div class="comments mt-5">
+            <%@post.comments.each do |comment|%>
+                <div class="comment py-2 border-bottom">
+                    <b><%=comment.user.name%> </b>
+                    <i><%=comment.date%></i>
+                    <p>Likes: <%=comment.likes.count%></p>
+                    <%=comment.body%>
+                    <br>
+                    <%if current_user.id == comment.user_id%>
+                        <%=link_to "Delete", comment_path(comment), method: :delete,data: {confirm: "Are you sure?"}%>
+                    <%else%>
+                        <%if comment.liked?(current_user) %>
+                            <%=button_to "Unlike", unlike_comment_path(id: @post.id, comment_id: comment.id), method: :delete %>
+                        <%else%>
+                            <%=button_to "Like", like_comment_path(id: @post.id, comment_id: comment.id), method: :post%>
+                        <%end%>
+                    <%end%>
+                </div>
+            <%end%>
+        </div>
+    </div>
+</div>

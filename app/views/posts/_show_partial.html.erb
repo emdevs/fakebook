@@ -1,4 +1,7 @@
 <div id="post-container" class="d-flex justify-content-center">
+
+    <%=link_to "Back", [@postable_name, :posts]%>
+
     <div id="post" class="bg-light d-flex flex-column mt-5 p-3">
         <h1><%=@post.title%></h1>
 
@@ -13,8 +16,9 @@
 
         <%if current_user.id == @post.user_id%>
             <div class="links">
-                <%=link_to "Edit", edit_post_path(@post)%>
-                <%=link_to "Delete", post_path(@post), method: :delete, data: {confirm: "Are you sure?"} %>
+            <%# postable_name, so that it works for both wall and other postable models %>
+                <%=link_to "Edit", [:edit, @postable_name, @post]%>
+                <%=link_to "Delete", [@postable_name, @post], method: :delete%>
             </div>
         <%else%>
             <%if @post.liked?(current_user) %>
@@ -24,7 +28,7 @@
             <%end%>
         <%end%>
 
-        <%=render "comment_form", comment: @comment %>
+        <%# <%=render "comment_form", comment: @comment %> %>
         <%# 
         check if post is deleted, likes on comments deleted aswell %>
         <div class="comments mt-5">

@@ -1,6 +1,5 @@
+<%=form_with model: @post, url: wall_post_path(@post.id) do |form|%>
 
-<%# this time, send to specific walls controller %>
-<%=form_with model: [@postable, @post] do |form|%>
     <%=form.label :title%>
     <%=form.text_field :title%><br>
 
