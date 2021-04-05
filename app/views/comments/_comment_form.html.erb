@@ -1,5 +1,5 @@
 <%if flash[:error]%>
-    <ul>
+    <div class="alert alert-danger">
         <%flash[:error].each do |msg|%>
             <li><%=msg%></li>
         <%end%>
