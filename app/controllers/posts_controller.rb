@@ -1,5 +1,7 @@
 class PostsController < ApplicationController
-    before_action :load_postable
+    before_action :load_postable, except: [:like, :dislike]
+    before_action :load_postable_for_like, only: [:like, :unlike]
+    
 
     def show
         @post = Post.find(params[:id])
@@ -47,15 +49,15 @@ class PostsController < ApplicationController
     end
 
     def like
-        @post = Post.find(params[:id])
+        # @post = Post.find(params[:id])
         Like.create(user_id: current_user.id, likeable_id: @post.id, likeable_type: "Post")
-        redirect_to @post
+        redirect_to [@postable_name, @post]
     end
 
     def unlike  
-        @post = Post.find(params[:id])
+        # @post = Post.find(params[:id])
         Like.find_by(likeable_id: @post.id, user_id: current_user.id, likeable_type: "Post").destroy
-        redirect_to @post
+        redirect_to [@postable_name, @post]
     end
 
     protected
@@ -65,6 +67,13 @@ class PostsController < ApplicationController
         @postable = resource.singularize.classify.constantize.find(id)
         #specifically for routes.
         @postable_name = @postable
+    end
+
+    def load_postable_for_like
+        #singular (ONLY wall/posts) and plural (clubs/1/posts) routes handled here, because all types of post likes will route to post#like
+        @post = Post.find(params[:id])
+        @postable = @post.postable_type.classify.constantize.find(@post.postable_id)
+        @postable_name = (@postable.class == Wall)? "wall" : @postable 
     end
 
     def post_params
