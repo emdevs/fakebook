@@ -1,3 +1,36 @@
-<h1>Meh</h1>
+<div id="post-container" class="d-flex justify-content-center">
 
-<%=render "posts/show_partial"%>
+    <%=link_to "Back", [@postable_name, :posts]%>
+
+    <div id="post" class="bg-light d-flex flex-column mt-5 p-3">
+        <h1><%=@post.title%></h1>
+
+        <%if @post.image.attached?%>
+            <img class="post-img" src="<%=url_for(@post.image)%>">
+        <%end%>
+
+        <div>
+            <%=@post.body%>
+            <p>Likes: <%=@post.likes.count%></p>
+        </div>
+
+        <%if current_user.id == @post.user_id%>
+            <div class="links">
+            <%# postable_name, so that it works for both wall and other postable models %>
+                <%=link_to "Edit", [:edit, @postable_name, @post]%>
+                <%=link_to "Delete", [@postable_name, @post], method: :delete%>
+            </div>
+        <%else%>
+            <%if @post.liked?(current_user) %>
+                <%=button_to "Unlike", unlike_post_path, method: :delete %>
+            <%else%>
+                <%=button_to "Like", like_post_path, method: :post%>
+            <%end%>
+        <%end%>
+
+        <%# check that if post deleted, comments deleted aswell %>
+        
+        <%=render "comments/comment_form", comment: @comment, route: club_post_comments_path(@postable, @post)%>
+        <%=render partial: "comments/comment_section", locals: {post_id: @post.id} %>
+    </div>
+</div>

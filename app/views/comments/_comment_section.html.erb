@@ -1,0 +1,25 @@
+<div class="comments mt-5">
+    <%# Set up post and postable %>
+    <%@post = Post.find(post_id)%>
+    <%@postable_name = (@post.postable.class == Wall)? "wall": @postable%>
+
+    <%@post.comments.each do |comment|%>
+        <div class="comment py-2 border-bottom">
+            <b><%=comment.user.name%> </b>
+            <i><%=comment.date%></i>
+            <p>Likes: <%=comment.likes.count%></p>
+            <%=comment.body%>
+            <br>
+            <%if current_user.id == comment.user_id%>
+                <%=link_to "Delete", [@postable_name, @post, comment], method: :delete%>
+            <%else%>
+                <%if comment.liked?(current_user) %>
+                    <%=button_to "Unlike", unlike_comment_path(id: post.id, comment_id: comment.id), method: :delete %>
+                <%else%>
+                    <%=button_to "Like", like_comment_path(id: post.id, comment_id: comment.id), method: :post%>
+                <%end%>
+            <%end%>
+        </div>
+    <%end%>
+</div>
+

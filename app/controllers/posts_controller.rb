@@ -4,7 +4,7 @@ class PostsController < ApplicationController
     def show
         @post = Post.find(params[:id])
         #generate new comment obj, for "new comment form" in post#show
-        # @comment = current_user.comments.build
+        @comment = @post.comments.new
     end
 
     def new
