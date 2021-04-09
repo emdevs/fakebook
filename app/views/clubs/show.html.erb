@@ -24,6 +24,20 @@
 <h2>Members!</h2>
 <%@club.members.each do |member|%>
     <p><%=member.name%></p>
+
+    <div>
+        <%=link_to "View profile", user_profile_path(member)%>
+
+        <%membership = Membership.find_by(member_id: member.id, club_id: @club.id)%>
+        <%if current_user.id == @club.owner_id%>
+            <%=link_to "Block", membership_path(membership), method: :patch%>
+            <p>I am blocked: <%="#{membership.blocked}"%></p>
+            <br><br>
+        <%end%>
+    </div>
 <%end%>
+
+
+<%# owner can block/unblock self and any member of club. make sure later owner cannot block self. %>
 
 <%# show case all posts in this club here %>

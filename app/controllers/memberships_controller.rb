@@ -1,4 +1,6 @@
 class MembershipsController < ApplicationController
+    before_action :require_owner, only: [:update]
+
     def create
         @membership = current_user.memberships.build(membership_params)
 
@@ -11,7 +13,10 @@ class MembershipsController < ApplicationController
     end
 
     def update
-        #update to block or unblock user
+        #only unblock and block
+        block_status = (@membership.blocked == false)? true : false
+        @membership.update(blocked: block_status)
+        redirect_to @club
     end
 
     def destroy
@@ -25,5 +30,14 @@ class MembershipsController < ApplicationController
 
     def membership_params
         params.permit(:club_id)
+    end
+
+    def require_owner
+        @membership = Membership.find(params[:id])
+        @club = Club.find(@membership.club_id)
+        unless (current_user.id == @club.owner_id)
+            flash[:alert] = "You do not have the permission to block users"
+            redirect_to @club
+        end
     end
 end

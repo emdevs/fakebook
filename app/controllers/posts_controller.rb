@@ -1,7 +1,9 @@
 class PostsController < ApplicationController
-    before_action :load_postable, except: [:like, :dislike]
-    before_action :load_postable_for_like, only: [:like, :unlike]
-    
+    prepend_before_action :load_postable, except: [:like, :dislike]
+    prepend_before_action :load_postable_for_like, only: [:like, :unlike]
+
+    #RESTRICT POST (EDIT UPDATE DESTROY) TO POST OWNER ONLY. should be inheritable
+    #LIKE METHODS ALREADY RESTRICTED TO CURRENT_USER
 
     def show
         @post = Post.find(params[:id])

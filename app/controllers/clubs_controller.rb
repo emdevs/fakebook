@@ -1,5 +1,6 @@
 class ClubsController < ApplicationController
     #need some kinda validation for show, only let members/owner view the club
+    before_action :require_owner, only: [:edit, :update, :destroy]
 
     def index
         @clubs = Club.all
@@ -53,6 +54,15 @@ class ClubsController < ApplicationController
 
     def club_params
         params.require(:club).permit(:owner_id, :name, :description, :capacity)
+    end
+
+    def require_owner
+        #might be redundant
+        @club = Club.find(params[:id])
+        unless (current_user.id == @club.owner_id)
+            flash[:alert] = "You do not have permission to perform this action."
+            redirect_to @club
+        end
     end
 
 end
