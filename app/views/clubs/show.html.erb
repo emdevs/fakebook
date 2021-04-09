@@ -1,5 +1,3 @@
-<p>Club main page. If you want to view this club page (or maybe instead, make posts/comment), need to be a member.</p>
-
 <%if @club.owner.id == current_user.id%>
     <%# make sure that if someone enters edit club in url, person will not be able to edit club %>
     <%=link_to "Edit Club", edit_club_path(@club)%>
@@ -7,10 +5,7 @@
 
 
 <%# find a way to transfer info of membership id to destroy %>
-<%=link_to "Leave Club", memberships_path(), method: :delete%>
-
-
-
+<%# <%=link_to "Leave Club", memberships_path(@club), method: :delete%> 
 
 <br><br>
 <%=link_to "Club Posts", club_posts_path(@club)%>

@@ -17,18 +17,33 @@
 
 /* @import "https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css" */
 
-.main-color {background-color: rgb(86, 147, 172);}
+$fb-color: rgb(103, 135, 194);
+
+#fb-logo {
+    max-height: 60px;
+    -webkit-user-drag: none;
+}
+
+#main-header {
+    background-color: $fb-color;
+}
+
+#top-nav {
+    .link {
+        text-decoration: none;
+    }
+    .link:hover {
+        color: rgb(23, 0, 77);
+    }
+}
 
 .shadow {box-shadow: 2px 2px 5px rgb(150, 150, 150);}
 
 body {
     min-height: 100vh;
     /* background-color:rgb(224, 229, 255); */
-    background-image: linear-gradient(rgb(239, 242, 255), rgb(147, 181, 214), rgb(54, 98, 139));
-}
-
-.heart {
-    
+    // background-image: linear-gradient(rgb(239, 242, 255), rgb(147, 181, 214), rgb(54, 98, 139));
+    background-image: linear-gradient(rgb(218, 225, 240), rgb(152, 169, 202), rgb(103, 135, 194));
 }
 
 #login-form {
@@ -40,6 +55,22 @@ body {
 
 .pass-form {
     width: fit-content;
+}
+
+#footer {
+    background-color:rgba(218, 225, 240, 0.4);
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+
+    #footer-link {
+        text-decoration: none;
+    }
+    #footer-link:hover {
+        //probably should use variable for colors like this
+        color: rgb(20, 13, 90);    
+    }
+    
 }
 
 @media only screen and (max-width: 768px) {

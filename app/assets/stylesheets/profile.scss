@@ -11,6 +11,7 @@
         max-width: 180px;
         max-height: 180px;
         border-radius: 50%; 
+        -webkit-user-drag: none;
 
         &:hover {
             transform: scale(1.05);

@@ -16,26 +16,35 @@
       <p class="notice alert-success m-0"><%= notice %></p>
     <%end%>
     <%if alert%>
-      <p class="alert alert-primary m-0"><%= alert %></p>
+      <p class="alert alert-primary m-0 p-0"><%= alert %></p>
     <%end%>
 
-    <div class="mt-0 jumbotron jumbotron-fluid main-color">
-      <h1>Fakebook</h1>
+    <div id="main-header" class="mt-0 jumbotron jumbotron-fluid">
+      <a href="/">
+        <img id="fb-logo" class="mx-3 my-2" src="/assets/fb-logo.png">
+      </a>
     </div>
 
-    <div class="topnav">
+    <div id="top-nav">
       <%if current_user != nil%>
-
-        <%=link_to "Homepage", root_path %>
-        <%=link_to "Profile", user_profile_url(current_user.id) %> 
-        <%=link_to "Create New Post", new_wall_post_path %>
-        <%=link_to "Clubs", clubs_path%>
-        <%=link_to "Manage Friends", friend_requests_path(current_user.id)%>
-        <%=link_to "Notifications", notifications_path%>
-        <%=link_to "Logout", destroy_user_session_path, method: :delete%>
+        <nav class="bg-light d-flex justify-content-around p-1 mb-4">
+          <%# <%=link_to "Homepage", root_path, class:"link" %> 
+          <%=link_to "Profile", user_profile_url(current_user.id), class:"link" %> 
+          <%=link_to "Create New Post", new_wall_post_path, class:"link" %>
+          <%=link_to "Clubs", clubs_path, class:"link"%>
+          <%=link_to "Manage Friends", friend_requests_path(current_user.id), class:"link"%>
+          <%=link_to "Notifications", notifications_path, class:"link"%>
+          <%=link_to "Logout", destroy_user_session_path, method: :delete, class:"link"%>
+        </nav>
       <%end%>
     </div>
     
     <%= yield %>
+
+    <footer>
+      <p id="footer" class="m-0">
+        A project by <a id="footer-link" target="_blank" href="https://github.com/emarjani">@emarjani</a>
+      </p>
+    </footer>
   </body>
 </html>

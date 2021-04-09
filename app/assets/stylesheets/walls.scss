@@ -1,6 +1,50 @@
 // Place all the styles related to the Walls controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+#nav-list {
+    display: none;
+    max-height: 285px;
+    border: none;
+    position: sticky;
+    top: 1rem;
+    li {
+        background-color: rgb(103, 135, 194);
+        .link {
+            color: rgb(255, 255, 255);
+            text-decoration: none;
+        }
+    }
+}
+
+.post-button {
+    border-radius: 50%;
+    padding: 0;
+    height: 70px;
+    width: 70px;
+    position:sticky;
+    top: 2rem;
+    background-color:rgb(103, 135, 194);
+    border: white 2px solid;
+    // text-decoration: none;
+
+
+    .text {
+        // border: 1px solid;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 70px;
+        //probably should center this way
+        font-size: 43px;
+        font-weight: 600;
+        color: white;
+        text-decoration: none;
+    }
+}
+
+
+
 #main-posts .post {
     min-width: 500px;
     border-radius: 5px;
@@ -9,9 +53,15 @@
 #friend-column {
     background-color: rgba(233, 233, 233, 0.2);
     border-radius: 5px;
+    min-width: 200px;
+
+    .friend-card {
+        // background-color: rgb(124, 164, 177);
+        // border: white 2px solid;
+        // background-color: rgb(54, 54, 78);
+    }
 
     .links {
-        
         a {
             text-decoration: none;
             font-size: 12px;
@@ -24,7 +74,6 @@
     max-width: 70px;
     max-height: 70px;
 }
-
 
 .post {
     min-width: 500px;

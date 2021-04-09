@@ -1,5 +1,36 @@
-
 <div id="homepage" class="d-flex justify-content-center">
+    <div id="nav-list" class="card m-2">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                <%=link_to "Homepage", root_path, class: "link"%>
+            </li>
+            <li class="list-group-item">
+                <%=link_to "Profile", user_profile_url(current_user.id), class: "link"%>
+            </li>
+            <li class="list-group-item">
+                <%=link_to "Create New Post", new_wall_post_path, class: "link" %>
+            </li>
+            <li class="list-group-item">
+                <%=link_to "Clubs", clubs_path, class: "link"%>
+            </li>
+            <li class="list-group-item">
+                <%=link_to "Manage Friends", friend_requests_path(current_user.id), class: "link"%>
+            </li>
+            <li class="list-group-item">
+                <%=link_to "Notifications", notifications_path, class: "link"%>
+            </li>
+            <li class="list-group-item">
+                <%=link_to "Logout", destroy_user_session_path, method: :delete, class: "link"%>
+            </li>
+        </ul>
+    </div>
+
+    
+    <button class="post-button my-2 mx-5">
+        <%=link_to "+", new_wall_post_path, class:"text"%>
+    </button>
+    
+
     <div id="main-posts" class="d-flex flex-column">
         <%@posts.each do |post|%>
             <div class="post d-flex flex-column bg-white shadow m-2 p-3">
@@ -31,9 +62,9 @@
     </div>
 
     <div id="friend-column" class="d-flex flex-column m-2 p-2">
-        <p>Friends</p>
+        <p class="mx-0 mb-1">Friends</p>
         <%current_user.friends.each do |friend|%>
-            <div class="friend-card d-flex bg-white p-1">
+            <div class="friend-card bg-white d-flex p-2">
                 <img class="profile-pic" src="<%=asset_path(url_for(friend.profile.attached_img))%>">
                 <div class="d-flex flex-column mx-2 justify-content-center">
                     <%=friend.name%>
