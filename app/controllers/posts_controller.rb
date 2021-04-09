@@ -2,9 +2,8 @@ class PostsController < ApplicationController
     prepend_before_action :load_postable, except: [:like, :dislike]
     prepend_before_action :load_postable_for_like, only: [:like, :unlike]
 
-    #RESTRICT POST (EDIT UPDATE DESTROY) TO POST OWNER ONLY. should be inheritable
-    #LIKE METHODS ALREADY RESTRICTED TO CURRENT_USER
-
+    before_action :require_owner, only: [:edit, :update, :destroy]
+    
     def show
         @post = Post.find(params[:id])
         #generate new comment obj, for "new comment form" in post#show
@@ -64,6 +63,10 @@ class PostsController < ApplicationController
 
     protected
 
+    def post_params
+        params.require(:post).permit(:title, :body, :image)
+    end
+
     def load_postable
         resource, id = request.path.split("/")[1,2]
         @postable = resource.singularize.classify.constantize.find(id)
@@ -78,7 +81,12 @@ class PostsController < ApplicationController
         @postable_name = (@postable.class == Wall)? "wall" : @postable 
     end
 
-    def post_params
-        params.require(:post).permit(:title, :body, :image)
+    def require_owner
+        @post = Post.find(params[:id])
+        unless (current_user.id == @post.user_id)
+            #make into flash[:error] later
+            flash[:alert] = "You do not have the permission to edit this post"
+            redirect_to [@postable_name, @post]
+        end
     end
 end
