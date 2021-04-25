@@ -1,13 +1,16 @@
-<h1>Notifications</h1>
 
-<%@users.each do |user|%>
-    <p><%=user.name%> wants to be your friend!</p>
-    <%invite = FriendRequest.where(
-        reciever_id: current_user.id,
-        requester_id: user.id,
-        status: false).first%>
-    <i>sent: <%=invite.created_at.strftime("%d-%m-%Y")%> </i>
-    <%=link_to "accept", friend_request_path(invite.id), method: :patch%>
-    <%=link_to "decline", friend_request_path(invite.id), method: :delete%>
-<%end%>
+<div id="notifications" class="m-2">
+    <h3>Notifications</h3>
+
+    <%@users.each do |user|%>
+        <p><%=user.name%> wants to be your friend!</p>
+        <%invite = FriendRequest.where(
+            reciever_id: current_user.id,
+            requester_id: user.id,
+            status: false).first%>
+        <i>sent: <%=invite.created_at.strftime("%d-%m-%Y")%> </i>
+        <%=link_to "accept", friend_request_path(invite.id), method: :patch%>
+        <%=link_to "decline", friend_request_path(invite.id), method: :delete%>
+    <%end%>
+</div>
 

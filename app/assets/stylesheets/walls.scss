@@ -2,48 +2,33 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
-#nav-list {
-    display: none;
-    max-height: 285px;
-    border: none;
-    position: sticky;
-    top: 1rem;
-    li {
-        background-color: rgb(103, 135, 194);
-        .link {
-            color: rgb(255, 255, 255);
-            text-decoration: none;
-        }
-    }
-}
-
 .post-button {
-    border-radius: 50%;
-    padding: 0;
     height: 70px;
     width: 70px;
     position:sticky;
     top: 2rem;
+    margin: 1rem 2rem 1rem 2rem;
+
+    border-radius: 50%;
+    padding: 0;
     background-color:rgb(103, 135, 194);
     border: white 2px solid;
-    // text-decoration: none;
 
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     .text {
-        // border: 1px solid;
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 70px;
-        //probably should center this way
-        font-size: 43px;
+        // border: 1px solid red;
+        //increase target area of click
+        min-width: 60px;
+
+        font-size: 45px;
         font-weight: 600;
         color: white;
         text-decoration: none;
     }
 }
-
-
 
 #main-posts .post {
     min-width: 500px;
@@ -98,13 +83,15 @@
     
     .post-pic {
         min-width: 100%;
+
+        // might change max width
+        max-width: 200px;
         // border: 3px rgb(185, 185, 185) solid;
     }
 }
 
 
 //post show
-
 
 .comment {
     background-color: rgb(241, 241, 241);

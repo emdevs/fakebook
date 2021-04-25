@@ -1,20 +1,50 @@
 <%# dont forget to add form errors later %>
 
 <%=form_with model: club do |form|%>
-    <%=form.label :name%>
-    <%=form.text_field :name%><br>
-    <%=club.errors[:name]%>
+    <div class="club-form p-3 my-5 bg-light">
+        <h2><%=form_title%></h2>
 
-    <%=form.label :description%>
-    <%=form.text_field :description%>
-    <%=club.errors[:description]%>
+        <div class="club-field name d-flex flex-column">
+            <%=form.label :name%>
+            <%=form.text_field :name, class:"text-field"%>
+            
+            <%unless club.errors[:name].empty?%>
+                <div class="alert alert-danger p-0">
+                    <%club.errors[:name].each do |msg|%>
+                        <li><%=msg%></li>
+                    <%end%>
+                </div>
+            <%end%>
+        </div>
 
-    <%=form.label :capacity%>
-    <%=form.number_field :capacity%>
-    <%=club.errors[:capacity]%>
+        <div class="club-field description d-flex flex-column">
+            <%=form.label :description%>
+            <%=form.text_area :description, class: "text-area"%>
+            
+            <%unless club.errors[:description].empty?%>
+                <div class="alert alert-danger p-0">
+                    <%club.errors[:description].each do |msg|%>
+                        <li><%=msg%></li>
+                    <%end%>
+                </div>
+            <%end%>
+        </div>
 
-    <%=form.hidden_field :owner_id, value: current_user.id%>
+        <div class="club-field capacity">
+            <%=form.label :capacity%>
+            <%=form.number_field :capacity%>
+            
+            <%unless club.errors[:capacity].empty?%>
+                <div class="alert alert-danger p-0">
+                    <%club.errors[:capacity].each do |msg|%>
+                        <li><%=msg%></li>
+                    <%end%>
+                </div>
+            <%end%>
+        </div>
 
-    <br>
-    <%=form.submit%>
+        <%=form.hidden_field :owner_id, value: current_user.id%>
+
+        <%=form.submit "Save", class: "submit-button p-2 mt-3"%>
+    </div>
 <%end%>

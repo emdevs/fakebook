@@ -1,5 +1,5 @@
-<h1>Edit Club</h1>
+<%=render "club_form", club: @club, form_title: "Edit Club"%>
 
-<%=render "club_form", club: @club%>
-
-<%=button_to "Delete club", club_path(@club), method: :delete, data: {confirm: "Are you sure?"}%>
+<div id="delete-club" class="">
+    <%=button_to "Delete club", club_path(@club), method: :delete, data: {confirm: "Are you sure?"}, class: "button"%>
+</div>

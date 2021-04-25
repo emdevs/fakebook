@@ -9,7 +9,7 @@
 <%# add stylign to this  %>
 <%= form_with model: comment, url: route do |form|%>
     <%=form.label :comment%><br>
-    <%=form.text_field :body%>
+    <%=form.text_area :body, class: "comment-box"%>
 
     <br>
     <%=form.submit%>

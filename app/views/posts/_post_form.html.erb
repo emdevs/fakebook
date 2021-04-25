@@ -1,13 +1,33 @@
 <%=form_with model: [@postable, @post] do |form|%>
-    <%=form.label :title%>
-    <%=form.text_field :title%><br>
+    <div class="form-container my-5 p-3 bg-light">
 
-    <%=form.label :body%>
-    <%=form.text_field :body%>
+        <h2><%=form_title%></h2>
 
-    <%=form.label :image%>
-    <%=form.file_field :image%>
+        <div class="post-errors">
+            <%unless @post.errors.messages.empty?%>
+                <div class="alert alert-danger">
+                    <%@post.errors.full_messages.each do |msg|%>
+                        <li><%=msg%></li>
+                    <%end%>
+                </div>
+            <%end%>
+        </div>
 
-    <br>
-    <%=form.submit%>
+        <div class="post-field title">
+            <%=form.label :title%>
+            <%=form.text_field :title, class: "text-field"%>
+        </div>
+
+        <div class="post-field body">
+            <%=form.label :body%>
+            <%=form.text_area :body, class: "text-area"%>
+        </div>
+
+        <div class="post-field img">
+            <%=form.label :image%>
+            <%=form.file_field :image%>
+        </div>
+
+        <%=form.submit "Submit", class:"submit-button p-2 mt-3"%>
+    </div>
 <%end%>

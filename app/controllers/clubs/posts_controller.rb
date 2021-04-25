@@ -5,6 +5,7 @@ class Clubs::PostsController < PostsController
 
     def index
         #maybe all posts, from UNBLOCEKD USERS only?
+        @club = Club.find(params[:club_id])
         @posts = Post.where(postable_type: "Club", postable_id: params[:club_id]).order('created_at DESC')
     end
 

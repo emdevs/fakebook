@@ -1,32 +1,6 @@
 <div id="homepage" class="d-flex justify-content-center">
-    <div id="nav-list" class="card m-2">
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item">
-                <%=link_to "Homepage", root_path, class: "link"%>
-            </li>
-            <li class="list-group-item">
-                <%=link_to "Profile", user_profile_url(current_user.id), class: "link"%>
-            </li>
-            <li class="list-group-item">
-                <%=link_to "Create New Post", new_wall_post_path, class: "link" %>
-            </li>
-            <li class="list-group-item">
-                <%=link_to "Clubs", clubs_path, class: "link"%>
-            </li>
-            <li class="list-group-item">
-                <%=link_to "Manage Friends", friend_requests_path(current_user.id), class: "link"%>
-            </li>
-            <li class="list-group-item">
-                <%=link_to "Notifications", notifications_path, class: "link"%>
-            </li>
-            <li class="list-group-item">
-                <%=link_to "Logout", destroy_user_session_path, method: :delete, class: "link"%>
-            </li>
-        </ul>
-    </div>
-
     
-    <button class="post-button my-2 mx-5">
+    <button class="post-button shadow">
         <%=link_to "+", new_wall_post_path, class:"text"%>
     </button>
     

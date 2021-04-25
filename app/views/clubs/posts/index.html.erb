@@ -1,4 +1,7 @@
 <div class="d-flex justify-content-center">
+
+    <%=link_to "Add Post", new_club_post_path(@club)%>
+
     <div id="main-posts" class="d-flex flex-column">
         <%@posts.each do |post|%>
             <div class="post d-flex flex-column bg-white shadow m-2 p-3">
@@ -22,8 +25,7 @@
 
                 <p>Likes: <%=post.likes.count%></p>
 
-                <%=post.id%>
-                <%=link_to "View more", club_post_path(post.postable, post) %>
+                <%=link_to "View more", club_post_path(@club, post) %>
             </div>
         <%end%>
     </div>

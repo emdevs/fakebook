@@ -1,5 +1,5 @@
 <div id="post-container" class="d-flex justify-content-center">
-    <div id="post" class="bg-light d-flex flex-column mt-5 p-3">
+    <div id="post" class="bg-light d-flex flex-column mt-3 p-3 shadow">
         <h1><%=@post.title%></h1>
 
         <%if @post.image.attached?%>
@@ -24,7 +24,9 @@
             <%end%>
         <%end%>
 
-        <%=render "comments/comment_form", comment: @comment, route: wall_post_comments_path(@post)%>
-        <%=render partial: "comments/comment_section", locals: {post_id: @post.id} %>
+        <div class="comments-section mt-2">
+            <%=render "comments/comment_form", comment: @comment, route: wall_post_comments_path(@post)%>
+            <%=render partial: "comments/comment_section", locals: {post_id: @post.id} %>
+        </div>
     </div>
 </div>

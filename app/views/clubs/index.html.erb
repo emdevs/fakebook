@@ -1,13 +1,9 @@
-<h1>INDEX CLUB PAGES</h1>
-<%# <p>This will list all clubs</h1> %>
-
 <%=link_to "Create Club", new_club_path%>
 
 
 <%@clubs.each do |club|%>
     <div>   
         <p><%=club.name%></p>
-        <p><%=club.description%></p>
         <p>Owned by: <%=club.owner.name%></p>
         <p>Member count: <%="#{club.members.count}/#{club.capacity}"%></p>
 

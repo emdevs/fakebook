@@ -29,7 +29,7 @@ class User < ApplicationRecord
 
   def validate_age?
     if birth_date.present? && (birth_date + 13.years >= Date.today)
-      errors.add(:birth_date, 'You should be at least 13 years old.')
+      errors.add(:birth_date, '(you should be at least 13 years old)')
     end
   end
 
@@ -52,6 +52,13 @@ class User < ApplicationRecord
     User.where(id: self.friends_ids)
   end
 
+  #friendship (grabs invite for a certain friendship.)
+  #find a ay to shorten this maybe
+  def friendship(friend)
+    FriendRequest.where(requester_id: self.id, reciever_id: friend.id, status: true).or(FriendRequest.where(reciever_id: self.id, requester_id: friend.id, status: true)).first
+  end
+
+
   def can_send_request
     a = FriendRequest.where(requester_id: self.id, status: false).pluck(:reciever_id)
     b = FriendRequest.where(reciever_id: self.id, status: false).pluck(:requester_id)
@@ -68,16 +75,7 @@ class User < ApplicationRecord
     User.where(id: ids)
   end
 
-  # def self.from_omniauth(auth)
-  #   where(email: auth.info.email).first_or_initialize.tap do |user|
-  #     user.email = auth.info.email
-  #     user.password = Devise.friendly_token[0,20]
-  #     user.name = auth.info.name
-  #     # user.gender = auth.extra.raw_info.gender
-  #     # user.profile_pic = auth.info.image
-  #     user.save
-  #   end
-  # end
+
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email

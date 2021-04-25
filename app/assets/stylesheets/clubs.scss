@@ -1,3 +1,87 @@
 // Place all the styles related to the Clubs controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+
+//club show
+
+#show-club {
+    // border: 1px red solid;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+#club-header {
+    background-color: rgb(243, 243, 243);
+    min-height: 120px;
+    // border: 1px blue solid;
+    h1 {
+        color: rgb(37, 18, 66);
+    }
+    .main-info {
+        // border: 1px red solid;
+    }
+
+    .member-count {
+        // border-radius: 5px;
+        // background-color: white;
+        // font-size: 20px;
+        // border: 1px grey solid;
+    }
+}
+
+#club-description {
+    background-color: rgb(214, 191, 224);
+    color: rgb(56, 11, 82);
+}
+
+#member-list {
+    background-color: rgba(230, 230, 230, 0.3);
+}
+
+.member-card {
+    .links {
+        font-size: 14px;
+
+        .block {
+            text-decoration: none;
+            color: white;
+            background-color: rgb(194, 32, 32);
+            border-radius: 5px;
+            
+            padding: 0.2em;
+        }
+    }
+}
+
+
+// club form
+
+.club-form {
+    max-width: 600px;
+    margin: 0 auto;
+
+    .club-field {
+        margin: 1rem 0 1rem 0;
+        .text-field, .text-area {
+            width: 100%;
+        }
+    }
+}
+
+#delete-club {
+    max-width: 600px;
+    margin: 0 auto;
+
+    .button {
+        background-color: rgb(194, 32, 32);
+        color: white;
+        border: none;
+        padding: 0.5em;
+    }
+}
+
+
+.badge {
+    background-color: rgb(144, 114, 172);
+}
