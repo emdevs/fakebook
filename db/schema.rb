@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_01_135616) do
+ActiveRecord::Schema.define(version: 2021_05_13_133129) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,13 @@ ActiveRecord::Schema.define(version: 2021_04_01_135616) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "chatrooms", force: :cascade do |t|
+    t.bigint "club_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["club_id"], name: "index_chatrooms_on_club_id"
   end
 
   create_table "clubs", force: :cascade do |t|
@@ -91,6 +98,17 @@ ActiveRecord::Schema.define(version: 2021_04_01_135616) do
     t.index ["club_id", "member_id"], name: "index_memberships_on_club_id_and_member_id", unique: true
   end
 
+  create_table "messages", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.text "message"
+    t.string "messageable_type"
+    t.bigint "messageable_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["messageable_type", "messageable_id"], name: "index_messages_on_messageable"
+    t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
   create_table "posts", force: :cascade do |t|
     t.string "title"
     t.text "body"
@@ -135,8 +153,10 @@ ActiveRecord::Schema.define(version: 2021_04_01_135616) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "chatrooms", "clubs"
   add_foreign_key "friend_requests", "users", column: "reciever_id", on_delete: :cascade
   add_foreign_key "friend_requests", "users", column: "requester_id", on_delete: :cascade
   add_foreign_key "likes", "users", on_delete: :cascade
+  add_foreign_key "messages", "users"
   add_foreign_key "profiles", "users", on_delete: :cascade
 end

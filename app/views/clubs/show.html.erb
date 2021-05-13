@@ -8,7 +8,6 @@
             </p>
         </div>
 
-
         <div class="links">
             <%=link_to "Club Posts", club_posts_path(@club)%>
             <%=link_to "Add post!", new_club_post_path(@club)%>
@@ -16,6 +15,9 @@
             <%if @club.owner.id == current_user.id%>
                 <%=link_to "Edit Club", edit_club_path(@club)%>
             <%end%>
+
+            <%# is this the right route? limit routes later to probably just show%>
+            <%=link_to "Club Chat", club_chat_path(@club)%>
         </div>
     </div>
 

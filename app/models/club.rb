@@ -9,6 +9,10 @@ class Club < ApplicationRecord
         less_than_or_equal_to: 50
     }
 
+    #after created,
+    after_create :create_chatroom
+
+
     #whenever club is saved, this will run (need to check sometime that this is working)
     validate :member_count_less_than_capacity, on: :edit
 
@@ -18,6 +22,8 @@ class Club < ApplicationRecord
     has_many :memberships
     has_many :members, through: :memberships
     has_many :posts, as: :postable
+
+    has_one :chatroom
 
     #Club Methods
     def member_count
@@ -35,5 +41,9 @@ class Club < ApplicationRecord
         if (self.capacity).is_a?(Integer) && self.members.count > self.capacity 
             errors.add(:capacity, "Capacity cannot be lower than the total number of current members.")
         end
+    end
+
+    def create_chatroom
+        Chatroom.create(club: self)
     end
 end

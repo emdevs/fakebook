@@ -1,0 +1,20 @@
+<h1>This is the <%= @club.name%> chatroom!</h1>
+
+<p>chatroom id: <%=@chatroom.id %></p>
+
+<div>
+    <div class="messages">
+        <% @messages.each do |msg|%>
+            <%= msg.message %>
+        <%end%>
+    </div>
+
+    <%=form_with(model: @message, id: "chatroom-#{@chatroom.id}",local: false) do |form|%>
+        <%= form.text_area :message, class: "text-field" %>
+        <%=form.hidden_field :messageable_id, value: @chatroom.id%>
+        <%=form.hidden_field :messageable_type, value: "Chatroom"%>
+
+        <%= form.submit "Send"%>
+    <%end%>
+
+</div>

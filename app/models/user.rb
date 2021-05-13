@@ -20,11 +20,17 @@ class User < ApplicationRecord
   has_many :sent_friend_requests, foreign_key: "requester_id", class_name: "FriendRequest"
   has_many :pending_friend_requests, foreign_key: "reciever_id", class_name: "FriendRequest"
 
+  #Messages (dependent destroy? we'll see)
+  has_many :messages
+
   #Clubs
   has_many :owned_clubs, foreign_key: "owner_id", class_name: "Club"
 
   has_many :memberships, foreign_key: "member_id"
   has_many :joined_clubs, through: :memberships, source: :club
+
+  #notifications
+  #for likes and posts, friend requests dont need notification model (it IS the notification)
 
 
   def validate_age?

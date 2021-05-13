@@ -3,10 +3,13 @@ Rails.application.routes.draw do
 
   root to: "walls/posts#index"
 
+  resources :messages
+
   resources :clubs do
     resources :posts, module: :clubs do
       resources :comments, only: [:new, :create, :destroy]
     end
+    resource :chatroom, as: "chat"
   end
 
   resource :wall do 
