@@ -1,3 +1,9 @@
-// Place all the styles related to the ClubChats controller here.
+// Place all the styles related to the Chatrooms controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+.chat {
+    height: 300px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}

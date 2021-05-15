@@ -1,9 +1,7 @@
 <h1>This is the <%= @club.name%> chatroom!</h1>
 
-<p>chatroom id: <%=@chatroom.id %></p>
-
-<div>
-    <div class="chat" id="chatroom-1" class="d-flex flex-column" data-chat-room="chatroom-1">
+<div class="chatroom">
+    <div class="chatroom-chat" class="d-flex flex-column" data-club-id="<%=@club.id%>">
         <% @messages.each do |msg|%>
             <div class="message">
 
@@ -20,7 +18,7 @@
     </div>
 
     <%=form_with(model: @message, local: false) do |form|%>
-        <%=form.text_area :message, class: "text-field" %>
+        <%=form.text_area :message, class: "message-field" %>
         <%=form.hidden_field :messageable_id, value: @chatroom.id%>
         <%=form.hidden_field :messageable_type, value: "Chatroom"%>
 

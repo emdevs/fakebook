@@ -1,40 +1,54 @@
 import consumer from "./consumer"
-//its like consumer isnt even subscribed doesnt matter if subsribes tow rong channel,
-//issue is it isnt subscribing at ALL
-//will chatroom model info be passed here? in params etc?
 
-//might need to specify room in chatroom channel 
-consumer.subscriptions.create({ channel: "ChatroomChannel", club_id: 4 }, {
-    connected(){
-        console.log("connected!");
-    },
+document.addEventListener('turbolinks:load', function() {
+    console.log("try to connect to chatroom channel");
+    let chatroom_chat = document.getElementsByClassName("chatroom-chat")[0];
 
-    received(data) {
-        console.log(data);
-        this.appendLine(data)
-    },
+    //if there is chatroom found:
+    if (chatroom_chat) {
+        let club_id = chatroom_chat.getAttribute("data-club-id");
 
-    appendLine(data) {
-        const html = this.createLine(data);
-        // const element = document.querySelector("[data-chat-room='chatroom-1']")
-        const element = document.getElementById("chatroom-1");
-        element.insertAdjacentHTML("beforeend", html)
-    },
+        //scroll to bottom automatically (chat)
+        chatroom_chat.scrollTop = chatroom_chat.scrollHeight;
 
-    createLine(data) {
-        return `
-            <div class="message">
-                <div class="text">
-                    <p class="name">${data["user"]["name"]}</p>
-                    <p>${data["message"]["message"]}</p>
-                </div>
-            </div>
-        `
+        consumer.subscriptions.create(
+            {
+                channel: "ChatroomChannel",
+                club_id: club_id
+
+            }, {
+
+            received(data) {
+                //clear input field (text area)
+                document.getElementsByClassName("message-field")[0].value = "";
+
+                //add data
+                this.appendLine(data);
+            },
+        
+            appendLine(data) {
+                const html = this.createLine(data);
+                const element = document.querySelector(`[data-club-id="${club_id}"]`);
+                element.insertAdjacentHTML("beforeend", html);
+
+                //smooth scroll to bottom of page
+                chatroom_chat.scrollTo({ top: chatroom_chat.scrollHeight, behavior: 'smooth' });
+            },
+        
+            createLine(data) {
+                return `
+                    <div class="message">
+                        <div class="text">
+                            <p class="name">${data["user"]["name"]}</p>
+                            <p>${data["message"]["message"]}</p>
+                        </div>
+                    </div>
+                `
+            }
+        })    
     }
+    
 })
 
 
 
-// $(document).on("turbolinks:load", function() {
-// <img src="${data["img"]}" alt="user profile pic">
-// })

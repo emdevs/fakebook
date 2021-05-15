@@ -8,13 +8,11 @@ class MessagesController < ApplicationController
             @chatroom_id = params[:message][:messageable_id]
             @chatroom = Chatroom.find(@chatroom_id)
             @user = @message.user
-            #@club_id = @chatroom.club.id
 
-            #also broadcast user information (name, profile pic), so that javascript channel can alos use this info
             ChatroomChannel.broadcast_to(@chatroom, {
                 user: @user,
-                message: @message,
-                img: @user.profile.attached_img
+                message: @message
+                # img_path: @user.profile.attached_img
             })
         else
             flash[:msg] = "Something went wrong, couldn't send message."
