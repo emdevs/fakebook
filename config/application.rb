@@ -13,6 +13,8 @@ module Fakebook
 
     config.action_mailer.default_url_options = { host: 'http://localhost:3000/' }
 
+    # config.action_cable.mount_path = '/websocket'
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files

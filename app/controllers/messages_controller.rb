@@ -5,9 +5,21 @@ class MessagesController < ApplicationController
         #make sure msgs cant be blank latter (db validation too)
         @message = current_user.messages.build(message_params)
         if @message.save
+            @chatroom_id = params[:message][:messageable_id]
+            @chatroom = Chatroom.find(@chatroom_id)
+            @user = @message.user
+            #@club_id = @chatroom.club.id
+
+            #also broadcast user information (name, profile pic), so that javascript channel can alos use this info
+            ChatroomChannel.broadcast_to(@chatroom, {
+                user: @user,
+                message: @message,
+                img: @user.profile.attached_img
+            })
         else
             flash[:msg] = "Something went wrong, couldn't send message."
         end
+        #add broadcast msg (will ob only wokr for chatroom (not private convo), fix this later)
     end
 
     protected

@@ -7,4 +7,7 @@ class ChatroomsController < ApplicationController
         @messages = @chatroom.messages.includes(:user)
         @message = @chatroom.messages.new
     end
+
+
+    #need to check if user is member of club here
 end
