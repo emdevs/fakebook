@@ -11,7 +11,9 @@ class MessagesController < ApplicationController
 
             ChatroomChannel.broadcast_to(@chatroom, {
                 user: @user,
-                message: @message
+                message: @message,
+                #cant access class method in js, manully enter datetime
+                datetime: @message.datetime
                 # img_path: @user.profile.attached_img
             })
         else

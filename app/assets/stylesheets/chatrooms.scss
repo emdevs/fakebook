@@ -2,8 +2,46 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
-.chat {
-    height: 300px;
-    overflow-x: hidden;
-    overflow-y: auto;
+
+.chatroom {
+    // border: 2px blue solid;
+    //bootstrap for this?
+    max-width: 75%;
+    min-height: 70vh;
+
+    .chatroom-chat {
+        max-height: 60vh;
+        // border: 1px green solid;
+        overflow-x: hidden;
+        overflow-y: auto;
+
+        .message {
+
+            border-radius: 5px;
+            min-width: 100%;
+
+            p { margin: 0 }
+
+            .meta-info{
+                // border: 1px solid;
+                font-size: 0.75rem;
+
+                .name {
+                    color: rgb(25, 25, 129);
+                    margin-right: 0.4rem;
+                }
+                .datetime {
+                    color: grey;
+                }
+            }
+        }
+    }
+
+    form {
+        // bottom: 0;
+        // border: 1px solid yellow;
+        .message-field {
+            width: 100%;
+        }
+    }    
 }

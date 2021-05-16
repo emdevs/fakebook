@@ -1,7 +1,7 @@
 import consumer from "./consumer"
 
+//after pageload and links ready
 document.addEventListener('turbolinks:load', function() {
-    console.log("try to connect to chatroom channel");
     let chatroom_chat = document.getElementsByClassName("chatroom-chat")[0];
 
     //if there is chatroom found:
@@ -36,11 +36,15 @@ document.addEventListener('turbolinks:load', function() {
             },
         
             createLine(data) {
+                //check if user.id matches message.user_id. if it does, append class that changes message color?
                 return `
-                    <div class="message">
+                    <div class="message bg-light p-2 my-2">
                         <div class="text">
-                            <p class="name">${data["user"]["name"]}</p>
-                            <p>${data["message"]["message"]}</p>
+                            <div class="meta-info d-flex">
+                                <p class="name">${data["user"]["name"]}</p>
+                                <p class="datetime">${data["datetime"]}</p>
+                            </div>
+                            <p class="msg">${data["message"]["message"]}</p>
                         </div>
                     </div>
                 `
@@ -49,6 +53,3 @@ document.addEventListener('turbolinks:load', function() {
     }
     
 })
-
-
-
