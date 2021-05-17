@@ -40,6 +40,27 @@
     border-radius: 5px;
     min-width: 200px;
 
+    .online-icon {
+        width: 0.5rem;
+        height: 0.5rem;
+        border-radius: 50%;
+        background-color: rgb(226, 61, 61);
+
+        -webkit-box-shadow:0 0 0.3rem rgb(226, 61, 61); 
+        -moz-box-shadow: 0 0 0.3rem rgb(226, 61, 61); 
+        box-shadow:0 0 0.3rem rgb(226, 61, 61);   
+    }
+
+    .isOnline {
+        background-color: green;
+
+        -webkit-box-shadow:0 0 0.3rem green; 
+        -moz-box-shadow: 0 0 0.3rem green; 
+        box-shadow:0 0 0.3rem green;   
+    }    
+
+
+
     .friend-card {
         // background-color: rgb(124, 164, 177);
         // border: white 2px solid;
@@ -90,6 +111,12 @@
     }
 }
 
+
+// .online-icon {
+//     min-width: 10px;
+//     min-height: 10px;
+//     color: red;
+// }
 
 //post show
 

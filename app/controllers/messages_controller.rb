@@ -1,8 +1,6 @@
 class MessagesController < ApplicationController
     #later, this needs to work for both private convo and chatroom later
     def create
-
-        #make sure msgs cant be blank latter (db validation too)
         @message = current_user.messages.build(message_params)
         if @message.save
             @chatroom_id = params[:message][:messageable_id]

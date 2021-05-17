@@ -1,6 +1,9 @@
 class Message < ApplicationRecord
   belongs_to :user
-  belongs_to :messageable, polymorphic: true, dependent: :destroy
+  belongs_to :messageable, polymorphic: true
+
+  #make sure msg isnt blank
+  validates :message, presence: true
 
   def datetime
     creation_date = self.created_at.strftime("%d-%m-%Y")

@@ -8,7 +8,7 @@ class User < ApplicationRecord
   validates :name, length: {minimum: 2}
   validates :birth_date, presence: true, if: :validate_age?
   # validates :gender, presence: true (FB signup will fail since cannot retrieve gender (for now, it returns nil))
-  after_create :create_profile
+  after_create :create_profile, :create_status
 
   enum gender: [:male, :female, :other]
   has_many :posts, dependent: :destroy
@@ -21,13 +21,17 @@ class User < ApplicationRecord
   has_many :pending_friend_requests, foreign_key: "reciever_id", class_name: "FriendRequest"
 
   #Messages (dependent destroy? we'll see)
-  has_many :messages
+  has_many :messages, dependent: :destroy
 
-  #Clubs
-  has_many :owned_clubs, foreign_key: "owner_id", class_name: "Club"
+  #Clubs (if club is destoryed...)
+  has_many :owned_clubs, foreign_key: "owner_id", class_name: "Club", dependent: :destroy
 
-  has_many :memberships, foreign_key: "member_id"
+  has_many :memberships, foreign_key: "member_id", dependent: :destroy
   has_many :joined_clubs, through: :memberships, source: :club
+
+  #online status
+  has_one :status, dependent: :destroy
+
 
   #notifications
   #for likes and posts, friend requests dont need notification model (it IS the notification)
@@ -116,5 +120,9 @@ class User < ApplicationRecord
 
   def create_profile
     Profile.create(user: self)
+  end
+
+  def create_status
+    Status.create(user: self)
   end
 end

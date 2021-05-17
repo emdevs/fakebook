@@ -21,7 +21,6 @@ document.addEventListener('turbolinks:load', function() {
             received(data) {
                 //clear input field (text area)
                 document.getElementsByClassName("message-field")[0].value = "";
-
                 //add data
                 this.appendLine(data);
             },
