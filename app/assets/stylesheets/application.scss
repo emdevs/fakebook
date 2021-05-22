@@ -14,9 +14,6 @@
  *= require_self
  */
 
-
-/* @import "https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css" */
-
 $fb-color: rgb(103, 135, 194);
 
 #fb-logo {
@@ -44,6 +41,25 @@ body {
     background-image: linear-gradient(rgb(218, 225, 240), rgb(152, 169, 202), rgb(103, 135, 194));
 }
 
+
+.online-icon {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background-color: rgb(226, 61, 61);
+
+    -webkit-box-shadow:0 0 0.3rem rgb(226, 61, 61); 
+    -moz-box-shadow: 0 0 0.3rem rgb(226, 61, 61); 
+    box-shadow:0 0 0.3rem rgb(226, 61, 61);   
+}
+
+.isOnline {
+    background-color: green;
+
+    -webkit-box-shadow:0 0 0.3rem green; 
+    -moz-box-shadow: 0 0 0.3rem green; 
+    box-shadow:0 0 0.3rem green;   
+}    
 
 // #footer {
 //     background-color:rgba(218, 225, 240, 0.4);

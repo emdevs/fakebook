@@ -1,0 +1,19 @@
+<div id="chats" class="container-fluid">
+    <div class="row">
+        <div id="chat-partners" class="col-4">
+            <h3>Chats</h3>
+            <%@chat_partners.each do |user|%>
+                <div class="chat-partner d-flex bg-light justify-content-between">
+                    <%chat = current_user.chat_with(user.id) %>
+                    <p><%=user.name%></p>
+                    
+                    <%=link_to "Open chat", chat_path(chat), remote: true, class: "open-chat"%>
+                </div>
+            <%end%> 
+        </div>
+
+        <div id="chat-container" class="col-8">
+            <%# this is where chat partial goes %>
+        </div>
+    </div>
+</div>

@@ -28,11 +28,10 @@ class FriendRequestsController < ApplicationController
     end
 
     def destroy
+        #either cancel friend request, or unfriend
         @request = FriendRequest.find(params[:id])
-
         @request.destroy
         
-        flash[:alert] = "Friend request cancelled."
         redirect_to friend_requests_path 
     end
 

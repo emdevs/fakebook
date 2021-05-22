@@ -1,8 +1,8 @@
 <div class="chatroom mx-auto p-3 d-flex flex-column">
 
     <h3><%= @club.name%> chatroom</h3>
-
-    <div class="chatroom-chat" class="d-flex flex-column bg-secondary" data-club-id="<%=@club.id%>">
+    <%# y are there two classes tf %>
+    <div class="chatroom-chat" class="d-flex flex-column" data-club-id="<%=@club.id%>">
         <% @messages.each do |msg|%>
             <div class="message bg-light p-2 my-2">
 

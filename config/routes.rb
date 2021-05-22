@@ -20,9 +20,12 @@ Rails.application.routes.draw do
 
   resources :memberships, only: [:create, :update, :destroy]
 
+  #where does users index go?
   resources :users, only: [:index, :edit, :update] do
     resource :profile, only: [:show, :edit, :update]
   end
+
+  resources :chats, only: [:index, :show]
 
   resources :friend_requests, only: [:new, :create, :index, :destroy, :update]
 

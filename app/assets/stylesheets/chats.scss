@@ -1,0 +1,52 @@
+// Place all the styles related to the Chats controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+//find a way to make height basolutely constant
+
+
+$chat-body-height: 60vh;
+
+#chats {
+
+    #chat-partners {
+        // border: 2px blue solid;
+    }
+
+    .chat-partner-info img{
+        width: 4rem;
+        height: 4rem;
+    }
+
+    #chat-container {
+        // border: 1px green solid;
+
+    }
+
+    .chat {
+        // border: 2px yellow solid;
+    }
+
+    .private-chat {
+        height: $chat-body-height;
+        // border: 2px purple solid;
+        overflow-x: hidden;
+        overflow-y: auto;
+        // height: 50vh;
+    }
+    .me {
+        align-self: flex-end;
+        background-color: rgb(86, 206, 86);
+        color: white;
+        // border: 1px solid;
+    }
+
+    .them {
+        align-self: flex-start;
+        background-color: white;
+    }
+
+    .message-field {
+        width: 100%;
+    }
+}
