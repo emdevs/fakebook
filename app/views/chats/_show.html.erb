@@ -1,9 +1,11 @@
-<div class="chat">
-    <div class="chat-partner-info d-flex">
-    
-        <img src=<%=asset_path(url_for(them.profile.attached_img))%>>
-        <p><%=them.name %></p>
-        <div class="<%=them_status%>" data-user-id="<%=@them.id%>"></div>
+<div class="chat d-flex flex-column overflow-hidden">
+    <div class="chat-partner-info d-flex align-items-center border-bottom bg-light p-2">
+        <img class="" src=<%=asset_path(url_for(them.profile.attached_img))%>>
+
+        <div class="d-flex align-items-center">
+            <p class="m-0 px-2"><%=them.name %></p>
+            <div class="online-icon <%=them_status%>" data-user-id="<%=@them.id%>"></div>
+        </div>
     </div>
 
     <div class="private-chat d-flex flex-column"  data-chat-id="<%=@chat.id%>">
@@ -11,11 +13,10 @@
 
             <%add_styling = (msg.user.id == me.id)? "me": "them"%>
 
-            <div class="message p-2 my-2 <%=add_styling%>">
+            <div class="message rounded shadow-sm px-2 py-1 m-2 <%=add_styling%>">
                 <div class="text">
-                    <div class="meta-info d-flex">
-                        <p class="name"><%=msg.user.name%></p>
-                        <p class="datetime"><%=msg.datetime%></p>
+                    <div class="meta-info">
+                        <p class="datetime text-muted m-0"><%=msg.datetime%></p>
                     </div>
                     <p class="msg"><%=msg.message%></p>
                 </div>
@@ -24,12 +25,12 @@
     </div>
 
     <%# should disable send button if friendship not found. you can no longer communicate with someone whos not ur friend %>
-    <%=form_with(model: @message, local: false, class: "message-form d-flex mt-2") do |form|%>
-        <%=form.text_field :message, autocomplete: "off", class: "message-field" %>
+    <%=form_with(model: @message, local: false, id: "message-form", class: "d-flex form-group") do |form|%>
+        <%=form.text_field :message, autocomplete: "off", class: "w-100 form-control" %>
         <%=form.hidden_field :messageable_id, value: @chat.id%>
         <%=form.hidden_field :messageable_type, value: "Chat"%>
 
-        <%=form.submit "Send", disabled: disable_submit%>
+        <%=form.submit "Send", disabled: disable_submit, class: "message-btn btn btn-primary"%>
     <%end%>
 </div>
 

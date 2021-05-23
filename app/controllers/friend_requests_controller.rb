@@ -2,8 +2,9 @@ class FriendRequestsController < ApplicationController
     #all possible people you can send requests to 
     def index
         @new_users = current_user.can_send_request
-        #@pending_user = 
+        
         @pending_users = current_user.pending_invitees
+        @invites_from = current_user.invites_from
     end
 
     def create
@@ -20,11 +21,14 @@ class FriendRequestsController < ApplicationController
 
     def update
         @request = FriendRequest.find(params[:id])
-
         @request.status = true
-        @request.save
 
-        redirect_to notifications_path
+        #if friendship created, automatically create private chat. (user_1 user_2 order doesnt matter)
+        if @request.save
+            Chat.create(user_1_id: @request.requester.id, user_2_id: @request.reciever.id)
+        end
+            
+        redirect_to friend_requests_path
     end
 
     def destroy

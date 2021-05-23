@@ -32,8 +32,8 @@
           <%=link_to "Profile", user_profile_url(current_user.id), class:"link" %> 
           <%=link_to "Create New Post", new_wall_post_path, class:"link" %>
           <%=link_to "Clubs", clubs_path, class:"link"%>
-          <%=link_to "Manage Friends", friend_requests_path(current_user), class:"link"%>
-          <%=link_to "Notifications", notifications_path, class:"link"%>
+          <%=link_to "Manage Friends", friend_requests_path, class:"link"%>
+          <%# <%=link_to "Notifications", notifications_path, class:"link"%>
           <%=link_to "Chats", chats_path, class: "link"%>
           <%=link_to "Logout", destroy_user_session_path, method: :delete, class:"link"%>
         </nav>

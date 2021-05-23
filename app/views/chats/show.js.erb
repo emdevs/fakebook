@@ -1,6 +1,8 @@
 <%# Set up locals for convo partial %>
-<%@me, @them = (@chat.user_1_id == current_user.id)? [@chat.user_1, @chat.user_2] : [@chat.user_2, @chat.user_1] %>
-<%@online_status = (@them.status.online === true)? "online-icon isOnline" : "online-icon"%>
+<%@me, @them = (@chat.user_1_id == current_user.id)?
+[@chat.user_1, @chat.user_2] :
+[@chat.user_2, @chat.user_1] %>
+<%@online_status = (@them.status.online === true)? "isOnline" : "isOffline"%>
 <%@disable_submit = (current_user.friendship(@them))? false : true %>
 
 

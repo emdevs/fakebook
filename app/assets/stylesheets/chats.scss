@@ -3,50 +3,55 @@
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
 //find a way to make height basolutely constant
+@import 'colors';
 
-
-$chat-body-height: 60vh;
+$chats-body-height: 75vh;
 
 #chats {
-
-    #chat-partners {
-        // border: 2px blue solid;
-    }
-
-    .chat-partner-info img{
-        width: 4rem;
-        height: 4rem;
-    }
-
     #chat-container {
-        // border: 1px green solid;
+        .temp {
+            background-color: rgba(156, 156, 156, 0.3);
+        }
+    }
 
+    #partners-container {
+        background-color: $fb-color;
+        height: $chats-body-height;
+
+        #chat-partners {
+            overflow-y: auto;
+        }
     }
 
     .chat {
-        // border: 2px yellow solid;
+        height: $chats-body-height;
+
+        .chat-partner-info img{
+            width: 3rem;
+            height: 3rem;
+        }
+        .meta-info {
+            font-size: 0.8rem;
+        }
     }
 
     .private-chat {
-        height: $chat-body-height;
-        // border: 2px purple solid;
+        background-color: $chat-background;
+        flex-grow: 1;
         overflow-x: hidden;
         overflow-y: auto;
-        // height: 50vh;
     }
+
+    //specifc message styling
     .me {
         align-self: flex-end;
         background-color: rgb(86, 206, 86);
         color: white;
-        // border: 1px solid;
+        text-align: right;
     }
 
     .them {
         align-self: flex-start;
         background-color: white;
-    }
-
-    .message-field {
-        width: 100%;
     }
 }

@@ -1,54 +1,62 @@
 import consumer from "./consumer"
 
-//after pageload and links ready
+//keep track of subscribed club ids. dont allow user to subscribe more than once to same club. 
+let subscribed_club_ids = [];
+
 document.addEventListener('turbolinks:load', function() {
     let chatroom_chat = document.getElementsByClassName("chatroom-chat")[0];
 
     //if there is chatroom found:
     if (chatroom_chat) {
+        //automatically scroll to bottom.
+        chatroom_chat.scrollTop = chatroom_chat.scrollHeight;
         let club_id = chatroom_chat.getAttribute("data-club-id");
 
-        //scroll to bottom automatically (chat)
-        chatroom_chat.scrollTop = chatroom_chat.scrollHeight;
+        //is chatroom already subscribed to?
+        if (!subscribed_club_ids.includes(club_id)){
+            //not subscribed yet;
+            consumer.subscriptions.create(
+                {
+                    channel: "ChatroomChannel",
+                    club_id: club_id
 
-        consumer.subscriptions.create(
-            {
-                channel: "ChatroomChannel",
-                club_id: club_id
+                }, {
 
-            }, {
+                connected() {
+                    subscribed_club_ids.push(club_id);
+                },
 
-            received(data) {
-                //clear input field (text area)
-                document.getElementsByClassName("message-field")[0].value = "";
-                //add data
-                this.appendLine(data);
-            },
-        
-            appendLine(data) {
-                const html = this.createLine(data);
-                const element = document.querySelector(`[data-club-id="${club_id}"]`);
-                element.insertAdjacentHTML("beforeend", html);
+                received(data) {
+                    //clear input field (text area)
+                    document.getElementById("message-form").reset();
+                    this.appendLine(data);
+                },
+            
+                appendLine(data) {
+                    const html = this.createLine(data);
+                    const element = document.querySelector(`[data-club-id="${club_id}"]`);
+                    element.insertAdjacentHTML("beforeend", html);
 
-                //smooth scroll to bottom of page
-                chatroom_chat.scrollTo({ top: chatroom_chat.scrollHeight, behavior: 'smooth' });
-            },
-        
-            createLine(data) {
-                //check if user.id matches message.user_id. if it does, append class that changes message color?
-                return `
-                    <div class="message bg-light p-2 my-2">
-                        <div class="text">
-                            <div class="meta-info d-flex">
-                                <p class="name">${data["user"]["name"]}</p>
-                                <p class="datetime">${data["datetime"]}</p>
+                    //smooth scroll to bottom of page
+                    chatroom_chat.scrollTo({ top: chatroom_chat.scrollHeight, behavior: 'smooth' });
+                },
+            
+                createLine(data) {
+                    
+                    return `
+                        <div class="message bg-light shadow-sm p-2 m-2 rounded">
+                            <div class="text">
+                                <div class="meta-info d-flex">
+                                    <p class="name m-0">${data["user"]["name"]}</p>
+                                    <p class="datetime m-0 px-2 text-muted">${data["datetime"]}</p>
+                                </div>
+                                <p class="msg m-0">${data["message"]["message"]}</p>
                             </div>
-                            <p class="msg">${data["message"]["message"]}</p>
                         </div>
-                    </div>
-                `
-            }
-        })    
+                    `
+                }
+            })    
+        }
     }
     
 })

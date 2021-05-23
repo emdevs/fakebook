@@ -13,14 +13,18 @@ consumer.subscriptions.create("OnlineChannel", {
 
     for (let i=0; i < online_icons.length; i++) {
       if (online_icons[i].getAttribute("data-user-id") == data["user_id"]) {
-        //figure out a way to make this less coupled (online_icons[i] = / online_icons.item(i) = both dont work)
         this.changeOnlineIcon(online_icons[i], data["online"]);
       }
     }
   },
 
   changeOnlineIcon(node, status) {
-    (status === true)? node.classList.add("isOnline") : node.classList.remove("isOnline");
+    let [current_status, old_status] = (status === true)?
+    ["isOnline", "isOffline"] :
+    ["isOffline", "isOnline"];
+
+    node.classList.add(current_status);
+    node.classList.remove(old_status);
   }
 
   // documentIsActive() {

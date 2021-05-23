@@ -1,18 +1,22 @@
 <div id="chats" class="container-fluid">
     <div class="row">
-        <div id="chat-partners" class="col-4">
-            <h3>Chats</h3>
-            <%@chat_partners.each do |user|%>
-                <div class="chat-partner d-flex bg-light justify-content-between">
-                    <%chat = current_user.chat_with(user.id) %>
-                    <p><%=user.name%></p>
-                    
-                    <%=link_to "Open chat", chat_path(chat), remote: true, class: "open-chat"%>
-                </div>
-            <%end%> 
+        <div id="partners-container" class="col-4 d-flex flex-column p-0">
+            <h4 class="bg-light shadow-sm border m-0 p-2">Chats</h4>
+            <div id="chat-partners" class="p-2">
+                <%@chat_partners.each do |user|%>
+                    <div class="chat-partner d-flex bg-light justify-content-between align-items-center my-2 p-2 shadow rounded">
+                        <%chat = current_user.chat_with(user.id) %>
+                        <p class="m-0"><%=user.name%></p>
+                        <%=link_to "Chat", chat_path(chat), remote: true, class: ""%>
+                    </div>
+                <%end%>
+            </div>
         </div>
 
         <div id="chat-container" class="col-8">
+            <div class="temp h-100 d-flex justify-content-center align-items-center">
+                <p class="text-white">Click on a chat link on the left hand column to start chatting!</p>
+            </div>
             <%# this is where chat partial goes %>
         </div>
     </div>
