@@ -9,7 +9,7 @@
                 
                 <div class="m-2">
                     <h3 class="m-2"><%=club.name%></h3>
-                    <p class="member-count position-absolute text-white m-2 p-1 rounded">Members: <%="#{club.members.count}/#{club.capacity}"%></p>
+                    <p class="member-count position-absolute text-white m-2 p-1 rounded">Members: <%="#{club.member_count}/#{club.capacity}"%></p>
 
                     <div class="links border-top d-flex justify-content-between align-items-center mx-2 pt-2">
                         <%=link_to "View", club_path(club)%>

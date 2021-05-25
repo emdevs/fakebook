@@ -10,6 +10,7 @@ class MembershipsController < ApplicationController
             flash[:alert] = "Successfully joined club!"
             redirect_to @membership.club
         else
+            #might be because club is full
             redirect_to clubs_path
         end
     end
