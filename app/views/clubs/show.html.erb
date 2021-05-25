@@ -1,72 +1,72 @@
-<div id="show-club">
-    <div id="club-header" class="d-flex flex-column justify-content-between p-2">
-        <div class="main-info d-flex justify-content-between">
-            <h1><%=@club.name%></h1>
 
-            <p class="member-count">
-                Members: <%="#{@club.member_count}/#{@club.capacity}"%>
-            </p>
-        </div>
+<div class="flex-grow-1 d-flex justify-content-center">
 
-        <div class="links">
-            <%=link_to "Club Posts", club_posts_path(@club)%>
-            <%=link_to "Add post!", new_club_post_path(@club)%>
-
-            <%if @club.owner.id == current_user.id%>
-                <%=link_to "Edit Club", edit_club_path(@club)%>
-            <%end%>
-
-            <%# is this the right route? limit routes later to probably just show%>
-            <%=link_to "Chatroom", club_chat_path(@club)%>
-        </div>
-    </div>
-
-    <div id="club-description" class="p-2 mb-3">
-        <p class="m-0"><%=@club.description%></p>
-    </div>
-
-    <div id="member-list" class="p-3">
-        <h5>Members</h5>
-
-        <%@club.members.each do |member|%>
-            <div class="member-card d-flex align-items-center justify-content-between my-2 p-1 bg-light">
-                
-                <div class="info">
-                    <%=member.name%>
-
-                    <%if @club.owner.id == member.id%>
-                        <span class="badge align-self-center">Owner</span>
-                    <%end%>
+    <div id="show-club" class="">
+        <div id="club-header" class="bg-secondary d-flex flex-column justify-content-between">
+            <div class="main-info position-relative">
+                <div class="club-header-frame">
+                    <img src="<%=asset_path(url_for(@club.background_img))%>">
                 </div>
-                
-                <div class="links mx-1">
-                    <%=link_to "View profile", user_profile_path(member)%>
 
-                    <%# if you are club owner, and member card is not of the owner %>
-                    <%if (current_user.id == @club.owner_id) && (member.id != @club.owner_id)%>
-                        <% membership = Membership.find_by(member_id: member.id, club_id: @club.id)%>
-                        <% button_title = (membership.blocked == true)? "Unblock" : "Block"%>
-                        <%=link_to "#{button_title}", membership_path(membership), method: :patch, class:"block"%>
-                    <%end%>
+                <div class="bar position-absolute w-100 d-flex justify-content-between align-items-center p-3">
+                    <h1 class="fw-bold text-white m-0"><%=@club.name%></h1>
+                    <p class="member-count text-white m-0">
+                        Members: <%="#{@club.member_count}/#{@club.capacity}"%>
+                    </p>
                 </div>
             </div>
-        <%end%>
+
+            <div class="links d-flex justify-content-evenly border bg-light border p-2">
+                <%=link_to "Club Posts", club_posts_path(@club)%>
+
+                <%if @club.owner.id == current_user.id%>
+                    <%=link_to "Edit Club", edit_club_path(@club)%>
+                <%end%>
+
+                <%=link_to "Chatroom", club_chat_path(@club)%>
+            </div>
+        </div>
+
+        <div id="club-description" class="text-muted bg-light p-3">
+            <p><%=@club.description%></p>
+        </div>
+
+        <div id="member-list" class="my-3">
+            <h5 class="bg-white border p-2 shadow-sm">Members</h5>
+
+            <%@club.members.each do |member|%>
+                <div class="member-card d-flex align-items-center justify-content-between my-2 p-2 bg-light">
+                    
+                    <div class="info">
+                        <%=link_to "#{member.name}", user_profile_path(member), class: "profile-link"%>
+
+                        <%if @club.owner.id == member.id%>
+                            <span class="badge align-self-center mx-2">Owner</span>
+                        <%end%>
+                    </div>
+
+                    <div class="links mx-1">
+                        <%=link_to "View profile", user_profile_path(member)%>
+                        <%# if you are club owner, and member card is not of the owner %>
+                        <%if (current_user.id == @club.owner_id) && (member.id != @club.owner_id)%>
+                            <% membership = Membership.find_by(member_id: member.id, club_id: @club.id)%>
+                            <% button_title = (membership.blocked == true)? "Unblock" : "Block"%>
+                            <%=link_to "#{button_title}", membership_path(membership), method: :patch, class:"block rounded text-white px-2 py-1 ms-2"%>
+                        <%end%>
+                    </div>
+                </div>
+            <%end%>
+        </div>
+
+        <%# mayb only owner can see? %>
+        <div id="blocked-member-list">
+        </div>
+
+        
+        <%# 
+        check that if capcity full, no more members added %>
+
+        <%# find a way to transfer info of membership id to destroy %>
+        <%# <%=link_to "Leave Club", memberships_path(@club), method: :delete%> 
     </div>
-
-    <%# mayb only owner can see? %>
-    <div id="blocked-member-list">
-    </div>
-
-    
-    <%# 
-    check that if capcity full, no more members added %>
-
-    <%# find a way to transfer info of membership id to destroy %>
-    <%# <%=link_to "Leave Club", memberships_path(@club), method: :delete%> 
 </div>
-
-<%# owner can block/unblock self and any member of club. make sure later owner cannot block self. %>
-
-<%# show case all posts in this club here %>
-
-<%# add diff view for blocked user %>

@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   resources :memberships, only: [:create, :update, :destroy]
 
   #where does users index go?
-  resources :users, only: [:index, :edit, :update] do
+  resources :users, only: [:edit, :update] do
     resource :profile, only: [:show, :edit, :update]
   end
 

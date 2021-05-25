@@ -1,11 +1,16 @@
 <%=form_with model: profile, url: user_profile_path, method: "patch" do |form|%>
 
-    <%=form.label :profile_pic%>
-    <%=form.file_field :profile_pic%>
+    <div class="form-group my-3">
+        <%=form.label :profile_pic%>
+        <%=form.file_field :profile_pic, class: "form-control"%>
+    </div>
 
-    <%=form.label :bio%>
-    <%=form.text_area :bio%><br>
+    <div class="form-group my-3">
+        <%=form.label :bio%>
+        <%=form.text_area :bio, class: "form-control text-area"%>
+    </div>
 
-    <br>
-    <%=form.submit%>
+    <div class="form-group my-3">
+        <%=form.submit "Save", :class => "btn btn-light border"%>
+    </div>
 <%end%>

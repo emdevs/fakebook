@@ -4,9 +4,9 @@
             <h4 class="bg-light shadow-sm border m-0 p-2">Chats</h4>
             <div id="chat-partners" class="p-2">
                 <%@chat_partners.each do |user|%>
-                    <div class="chat-partner d-flex bg-light justify-content-between align-items-center my-2 p-2 shadow rounded">
+                    <div class="chat-partner d-flex bg-light justify-content-between align-items-center my-2 p-2 shadow-sm rounded">
                         <%chat = current_user.chat_with(user.id) %>
-                        <p class="m-0"><%=user.name%></p>
+                        <%=link_to "#{user.name}", user_profile_path(user), class: "profile-link"%>
                         <%=link_to "Chat", chat_path(chat), remote: true, class: ""%>
                     </div>
                 <%end%>
@@ -14,10 +14,21 @@
         </div>
 
         <div id="chat-container" class="col-8">
-            <div class="temp h-100 d-flex justify-content-center align-items-center">
-                <p class="text-white">Click on a chat link on the left hand column to start chatting!</p>
-            </div>
             <%# this is where chat partial goes %>
+            <%# placeholder untill conversation partial is loaded %>
+            <div class="temp position-relative h-100 d-flex flex-column justify-content-between">
+                <div class="topbar bg-white d-flex align-items-center p-2">
+                    <div class="square"></div>
+                    <div class="name mx-2"></div>
+                </div>
+                <div class="body border h-100 d-flex justify-content-center align-items-center">
+                </div>
+                <div class="botbar bg-white"></div>
+                <div class="mask position-absolute h-100 w-100"></div>
+                <p class="text position-absolute text-center">
+                    Click on a chat link on the left hand column to start chatting with a friend!
+                </p>
+            </div>
         </div>
     </div>
 </div>

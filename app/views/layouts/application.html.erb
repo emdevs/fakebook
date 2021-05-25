@@ -11,7 +11,7 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body class="d-flex flex-column">
     <%if notice%>
       <p class="notice alert-success m-0"><%= notice %></p>
     <%end%>
@@ -34,18 +34,12 @@
           <%=link_to "Clubs", clubs_path, class:"link"%>
           <%=link_to "Manage Friends", friend_requests_path, class:"link"%>
           <%# <%=link_to "Notifications", notifications_path, class:"link"%>
-          <%=link_to "Chats", chats_path, class: "link"%>
+          <%=link_to "Chat", chats_path, class: "link"%>
           <%=link_to "Logout", destroy_user_session_path, method: :delete, class:"link"%>
         </nav>
       <%end%>
     </div>
     
-    <%= yield %>
-
-    <%# <footer>
-      <p id="footer" class="m-0">
-        A project by <a id="footer-link" target="_blank" href="https://github.com/emarjani">@emarjani</a>
-      </p>
-    </footer> %>
+    <div class="yield d-flex flex-column flex-grow-1"><%= yield %></div>
   </body>
 </html>

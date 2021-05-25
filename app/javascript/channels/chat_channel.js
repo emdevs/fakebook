@@ -3,6 +3,8 @@ import consumer from "./consumer"
 //keep track of all chat ids already subscribed to. prevent from subscribing to same channel multiple times.
 let subscribed_chat_ids = [];
 
+//need to save a current_Id when first subscribed
+
 document.addEventListener('turbolinks:load', function() {
     const chats_page = document.getElementById("chats");
 
@@ -17,6 +19,7 @@ document.addEventListener('turbolinks:load', function() {
                 //scroll to bottom of chat
                 private_chat.scrollTop = private_chat.scrollHeight;
                 let chat_id = private_chat.getAttribute("data-chat-id");
+                let partner_id = private_chat.getAttribute("data-partner-id");
 
                 //if not subscribed to channel then subscribe
                 if (!subscribed_chat_ids.includes(chat_id)) {
@@ -47,7 +50,7 @@ document.addEventListener('turbolinks:load', function() {
                         },
                     
                         createLine(data) {
-                            let styling = (data["current_user_id"] == data["message"]["user_id"])? "me" : "them";
+                            let styling = (partner_id == data["message"]["user_id"])? "them" : "me";
     
                             return `
                                 <div class="message rounded shadow-sm px-2 py-1 m-2 ${styling}">

@@ -17,7 +17,10 @@ class Club < ApplicationRecord
     validate :member_count_less_than_capacity, on: :edit
 
     belongs_to :owner, class_name: "User"
-    
+
+    #club image
+    has_one_attached :image
+
     #remember to delete memberships and club posts if club is deleted
     has_many :memberships
     has_many :members, through: :memberships
@@ -32,6 +35,10 @@ class Club < ApplicationRecord
 
     def member?(user_id)
         bool = (self.memberships.find_by(member_id: user_id))? true : false
+    end
+
+    def background_img
+        img_path = (self.image.attached?)? self.image : "club_default.jpg"
     end
 
     private

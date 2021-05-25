@@ -1,9 +1,9 @@
 {
-  "application.js": "/packs/js/application-9e4ebdef1e768b15eca4.js",
+  "application.js": "/packs/js/application-ff0b2b6295a61c7d9d37.js",
   "entrypoints": {
     "application": {
       "js": [
-        "/packs/js/application-9e4ebdef1e768b15eca4.js"
+        "/packs/js/application-ff0b2b6295a61c7d9d37.js"
       ]
     }
   }

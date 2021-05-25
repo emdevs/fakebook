@@ -1,23 +1,25 @@
-<div class="comments mt-5">
+<div class="comments mt-4">
     <%#postable_name inherited form post#show %>
     <%@post = Post.find(post_id)%>
     
     <%@post.comments.each do |comment|%>
-        <div class="comment py-2 border-bottom">
-            <b><%=comment.user.name%> </b>
-            <i><%=comment.date%></i>
+        <div class="comment p-2 border-bottom">
+            <%=link_to "#{comment.user.name}", user_profile_path(comment.user), class: "fw-bold profile-link"%>
+            <i class="text-muted"><%=comment.date%></i>
             <p>Likes: <%=comment.likes.count%></p>
             <%=comment.body%>
 
-            <%if current_user.id == comment.user_id%>
-                <%=link_to "Delete", [@postable_name, @post, comment], method: :delete%>
-            <%else%>
-                <%if comment.liked?(current_user) %>
-                    <%=button_to "Unlike", unlike_comment_path(@post, comment), method: :delete %>
+            <div class="d-flex my-2">
+                <%if current_user.id == comment.user_id%>
+                    <%=link_to "Delete", [@postable_name, @post, comment], method: :delete%>
                 <%else%>
-                    <%=button_to "Like", like_comment_path(@post, comment), method: :post%>
+                    <%if comment.liked?(current_user) %>
+                        <%=button_to "Unlike", unlike_comment_path(@post, comment), method: :delete, class: "btn btn-sm border btn-light" %>
+                    <%else%>
+                        <%=button_to "Like", like_comment_path(@post, comment), method: :post, class: "btn btn-sm border btn-light"%>
+                    <%end%>
                 <%end%>
-            <%end%>
+            </div>
         </div>
     <%end%>
 </div>

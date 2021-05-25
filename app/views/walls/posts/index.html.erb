@@ -1,18 +1,19 @@
 <div id="homepage" class="d-flex justify-content-center">
     
-    <button class="post-button shadow">
+    <button class="post-button d-flex justify-content-center align-items-center rounded-circle border border-white">
         <%=link_to "+", new_wall_post_path, class:"text"%>
     </button>
     
-
     <div id="main-posts" class="d-flex flex-column">
         <%@posts.each do |post|%>
-            <div class="post d-flex flex-column bg-white shadow m-2 p-3">
+            <div class="post d-flex flex-column bg-white shadow-sm m-2 p-3">
 
                 <div class="author-info d-flex">
-                    <img class="profile-pic" src="<%=asset_path(url_for(post.user.profile.attached_img))%>">
+                    <div class="square-frame">
+                        <img class="" src="<%=asset_path(url_for(post.user.profile.attached_img))%>">
+                    </div>
                     <div class="d-flex flex-column mx-2">
-                        <p class="author m-0"><%=post.user.name%></p>
+                        <%=link_to "#{post.user.name}", user_profile_path(post.user), class: "profile-link"%>
                         <p class="date m-0"><%=post.date%></p>
                     </div>
                 </div>
@@ -34,26 +35,26 @@
         <%end%>
     </div>
 
-    <div id="friend-column" class="d-flex flex-column m-2 p-2">
-        <p class="mx-0 mb-1">Friends</p>
+    <div id="friend-column" class="d-flex flex-column justify-content-start m-2">
+        <p class="bg-light text-secondary border p-2 mb-1">Friends</p>
         <%current_user.friends.each do |friend|%>
-            
-            <%# adding and removing "isOnline" on class will allow changes in color %>
-            <%online_icon_class = (friend.status.online === true)? "online-icon isOnline" : "online-icon"%>
+            <%online_icon_class = (friend.status.online === true)? "isOnline" : "isOffline"%>
 
-            <div class="friend-card bg-white d-flex p-2">
-                <img class="profile-pic" src="<%=asset_path(url_for(friend.profile.attached_img))%>">
-                <div class="d-flex flex-column mx-2 justify-content-center">
+            <div class="friend-card bg-white d-flex my-1">
+                
+                <div class="square-frame">
+                    <img class="" src="<%=asset_path(url_for(friend.profile.attached_img))%>">
+                </div>
+
+                <div class="d-flex flex-column mx-2 justify-content-center w-100">
 
                     <div class="d-flex justify-content-between align-items-center">
-                        <%=friend.name%>
-                        <div class="<%=online_icon_class%>" data-user-id="<%=friend.id%>"></div>
+                        <%=link_to "#{friend.name}", user_profile_path(friend), class: "profile-link"%>
+                        <div class="online-icon <%=online_icon_class%> ms-2" data-user-id="<%=friend.id%>"></div>
                     </div>
 
                     <div class="links">
                         <%=link_to "View profile", user_profile_path(friend)%>
-                        <%# coming soon %>
-                        <%=link_to "Send message"%>
                     </div>
                 </div>
             </div>

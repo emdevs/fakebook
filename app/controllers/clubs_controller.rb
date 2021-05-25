@@ -53,7 +53,7 @@ class ClubsController < ApplicationController
     private
 
     def club_params
-        params.require(:club).permit(:owner_id, :name, :description, :capacity)
+        params.require(:club).permit(:owner_id, :name, :description, :capacity, :image)
     end
 
     def require_owner

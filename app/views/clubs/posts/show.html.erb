@@ -1,17 +1,17 @@
+<%# <%=link_to "Back", [@postable_name, :posts]%> 
+
 <div id="post-container" class="d-flex justify-content-center">
 
-    <%=link_to "Back", [@postable_name, :posts]%>
-
-    <div id="post" class="bg-light d-flex flex-column mt-5 p-3">
-        <h1><%=@post.title%></h1>
+    <div class="post bg-light d-flex flex-column p-3 shadow-sm">
+        <h2 class=""><%=@post.title%></h2>
 
         <%if @post.image.attached?%>
-            <img class="post-img" src="<%=url_for(@post.image)%>">
+            <img class="post-img w-100" src="<%=url_for(@post.image)%>">
         <%end%>
 
         <div>
-            <%=@post.body%>
-            <p>Likes: <%=@post.likes.count%></p>
+            <p class="my-2"><%=@post.body%></p>
+            <p class="">Likes: <%=@post.likes.count%></p>
         </div>
 
         <%if current_user.id == @post.user_id%>
@@ -22,14 +22,12 @@
             </div>
         <%else%>
             <%if @post.liked?(current_user) %>
-                <%=button_to "Unlike", unlike_post_path, method: :delete %>
+                <%=button_to "Unlike", unlike_post_path, method: :delete, class: "btn btn-light border" %>
             <%else%>
-                <%=button_to "Like", like_post_path, method: :post%>
+                <%=button_to "Like", like_post_path, method: :post, class: "btn btn-light border"%>
             <%end%>
         <%end%>
 
-        <%# check that if post deleted, comments deleted aswell %>
-        
         <%=render "comments/comment_form", comment: @comment, route: club_post_comments_path(@postable, @post)%>
         <%=render partial: "comments/comment_section", locals: {post_id: @post.id} %>
     </div>

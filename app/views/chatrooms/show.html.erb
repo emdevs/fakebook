@@ -1,12 +1,12 @@
 <div class="chatroom mx-auto d-flex flex-column">
-    <h4 class="text-white m-0 border-bottom p-2"><%= @club.name%> chatroom</h4>
+    <h4 class="text-white m-0 border-bottom p-3"><%= @club.name%> chatroom</h4>
 
     <div class="chatroom-chat d-flex flex-column" data-club-id="<%=@club.id%>">
         <% @messages.each do |msg|%>
             <div class="message bg-light shadow-sm p-2 m-2 rounded">
                 <div class="text">
                     <div class="meta-info d-flex">
-                        <p class="name m-0"><%=msg.user.name%></p>
+                        <%=link_to "#{msg.user.name}", user_profile_path(msg.user), class: "profile-link text-primary"%>
                         <p class="datetime m-0 px-2 text-muted"><%=msg.datetime%></p>
                     </div>
                     <p class="msg m-0"><%=msg.message%></p>

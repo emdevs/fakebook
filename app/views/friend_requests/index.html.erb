@@ -1,64 +1,82 @@
-<%# <h1>Friend Requests Page</h1> %>
-
-<div class="friend-requests d-flex justify-content-around">
+<div class="friend-requests d-flex justify-content-evenly">
     <div class="notfriend-column d-flex flex-column">
-        
 
-        <div class="sent-requests shadow m-2 p-2">
-            <h3 class="text-white">Sent Requests</h3>
-
-            <%@pending_users.each do |user|%>
-                <div class="sent-request d-flex justify-content-between bg-light my-2 p-2">
-                    <%invite = FriendRequest.where(requester_id: current_user.id, reciever_id: user.id, status: false).first%>
-                    <div class="user-info">
-                        <%=user.name%>
-                        <%=link_to "View Profile", user_profile_url(user), class: "profile-link"%>
+        <div class="incoming-requests mb-2">
+            <h4 class="text-white shadow-sm p-2">Incoming Requests</h4>
+            <%@invites_from.each do |user|%>
+                <div class="incoming-request d-flex justify-content-between align-items-center bg-light my-2 p-2">
+                    <%invite = FriendRequest.where(requester_id: user.id, reciever_id: current_user.id, status: false).first%>
+                    <div class="user-info d-flex align-items-center">
+                        <div class="square-frame">
+                            <img class="" src="<%=asset_path(url_for(user.profile.attached_img))%>">
+                        </div>
+                        <div class="d-flex flex-column mx-3">
+                            <%=link_to "#{user.name}", user_profile_path(user), class: "profile-link"%>
+                            <%=link_to "View Profile", user_profile_url(user), class: "view-profile"%>
+                        </div>
                     </div>
-                    <%=button_to "Cancel", friend_request_path(invite), method: :delete, class: "cancel-button"%>
+
+                    <div class="buttons-container d-flex">
+                        <%=button_to "Accept", friend_request_path(invite), method: :patch, class: "success-button rounded border mx-2"%>
+                        <%=button_to "Decline", friend_request_path(invite), method: :delete, class: "cancel-button rounded border"%>
+                    </div>
                 </div>
             <%end%>
         </div>
 
-        <div class="new-users shadow m-2 p-2">
-            <h3 class="text-white my-2">Add Users</h3>
+        <div class="sent-requests mb-2">
+            <h4 class="text-white shadow-sm p-2">Sent Requests</h4>
 
-            <%@new_users.each do |user|%>
-                <div class="new-user d-flex justify-content-between bg-light my-2 p-2">
+            <%@pending_users.each do |user|%>
+                <div class="sent-request d-flex justify-content-between bg-light m-2 p-2">
+                    <%invite = FriendRequest.where(requester_id: current_user.id, reciever_id: user.id, status: false).first%>
                     <div class="user-info">
-                        <%=user.name%>
-                        <%=link_to "View Profile", user_profile_url(user), class: "profile-link"%>
+                        <%=link_to "#{user.name}", user_profile_path(user), class: "profile-link"%>
+                        <%=link_to "View Profile", user_profile_url(user), class: "view-profile"%>
                     </div>
-                    <%# need to send user_id as parameter to friend_request#Create %>
-                    <%# make params sent not visible in url, its usper ugly %>
-                    <%=button_to "Invite", friend_requests_path(reciever_id: user.id), method: :post, class: "invite-button"%>
+                    <%=button_to "Cancel", friend_request_path(invite), method: :delete, class: "cancel-button rounded border"%>
                 </div>
             <%end%>
+        </div>
+
+        <div class="new-users">
+            <h4 class="bg-light shadow-sm p-2">Add Users</h4>
+            <div class="new-users-container">
+                <%@new_users.each do |user|%>
+                    <div class="new-user-card d-flex flex-column bg-light m-2">
+                        <div class="square-frame">
+                            <img src="<%=asset_path(url_for(user.profile.attached_img))%>">
+                        </div>
+                        <%=link_to "#{user.name}", user_profile_path(user), class: "profile-link text-center m-2"%> 
+                        <%=button_to "Invite", friend_requests_path(reciever_id: user.id), method: :post, class: "success-button border rounded w-100"%>
+                    </div>
+                <%end%>
+            </div>
         </div>
     </div>
 
     <%# maybe make friend column into partial%>
     <%# friend col disappears at small size becaus einherit from wall_posts index %>
 
-    <div id="friend-column" class="d-flex flex-column p-2">
-        <p class="mx-0 mb-1">Friends</p>
+    <div id="friend-column" class="d-flex flex-column">
+        <p class="text-secondary bg-light border shadow-sm p-2 mx-0 mb-1">Friends</p>
 
         <%# maybe add text graphic if no friends added yet %>
-
         <%current_user.friends.each do |friend|%>
-            <div class="friend-card bg-white d-flex p-2">
+            <div class="friend-card bg-white d-flex p-2 my-1">
 
                 <%friendship = current_user.friendship(friend)%>
 
-                <img class="profile-pic" src="<%=asset_path(url_for(friend.profile.attached_img))%>">
-                <div class="info d-flex flex-column justify-content-center w-100">
-                    <%=friend.name%>
+                <div class="square-frame">
+                    <img class="profile-pic" src="<%=asset_path(url_for(friend.profile.attached_img))%>">
+                </div>
+                <div class="info d-flex flex-column justify-content-center w-100 px-1">
+                    <%=link_to "#{friend.name}", user_profile_path(friend), class: "profile-link"%>
                     <div class="links d-flex align-items-end justify-content-between">
-                        
-                        <%=link_to "View profile", user_profile_path(friend)%>
                         <%=link_to "Unfriend", friend_request_path(friendship),
                             method: :delete,
-                            data: {confirm: "Are you sure?"},
-                            class: "unfriend"
+                            data: {confirm: "Are you sure? You will no longer be able to message this person."},
+                            class: "text-danger"
                         %>
                     </div>
                 </div>
@@ -66,5 +84,3 @@
         <%end%>
     </div>
 </div>
-
-<%# params: {'request[reciever_id]' => user.id} %>

@@ -5,67 +5,59 @@
 .post-button {
     height: 70px;
     width: 70px;
+    position: -webkit-sticky; /* Safari */
     position:sticky;
     top: 2rem;
     margin: 1rem 2rem 1rem 2rem;
 
-    border-radius: 50%;
     padding: 0;
     background-color:rgb(103, 135, 194);
-    border: white 2px solid;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
 
     .text {
-        // border: 1px solid red;
-        //increase target area of click
         min-width: 60px;
-
         font-size: 45px;
         font-weight: 600;
         color: white;
         text-decoration: none;
     }
+
+    @media screen and (max-width: 1000px) {
+        display: none !important;
+    }
 }
 
-#main-posts .post {
-    min-width: 500px;
-    border-radius: 5px;
-}
+
 
 #friend-column {
-    background-color: rgba(233, 233, 233, 0.2);
-    border-radius: 5px;
-    min-width: 200px;
-
-    
-    .friend-card {
-        // background-color: rgb(124, 164, 177);
-        // border: white 2px solid;
-        // background-color: rgb(54, 54, 78);
-    }
+    background-color: rgba(226, 226, 226, 0.2);
+    min-width: 250px;
+    min-height: 100vh;
+    height: fit-content;
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+    top: 0;
 
     .links {
         a {
             text-decoration: none;
             font-size: 12px;
-            // background-color: rgb(151, 206, 228);
         }
     }
 }
 
-.profile-pic {
-    max-width: 70px;
-    max-height: 70px;
-}
 
 .post {
     min-width: 500px;
     max-width: 550px;
+
+    .author-info {
+        .square-frame {
+            min-width: 50px;
+        }
+    }
+
     .date {
-        font-size: 14px;
+        font-size: 0.9rem;
         color: rgb(109, 109, 109);
         font-style: italic;
     }
@@ -84,21 +76,9 @@
     
     .post-pic {
         min-width: 100%;
-
-        // might change max width
         max-width: 200px;
-        // border: 3px rgb(185, 185, 185) solid;
     }
 }
-
-
-// .online-icon {
-//     min-width: 10px;
-//     min-height: 10px;
-//     color: red;
-// }
-
-//post show
 
 .comment {
     background-color: rgb(241, 241, 241);
@@ -109,7 +89,6 @@
 @media only screen and (max-width: 1000px) {
     #friend-column {
         display: none !important;
-        // visibility: hidden;
     }
 }
 

@@ -1,27 +1,27 @@
-<div class="login d-flex justify-content-center align-content-center">
-  <div id="login-form" class="d-flex flex-column align-items-center bg-light shadow p-3">
+<div class="login flex-grow-1 d-flex justify-content-center align-items-center">
+  <div id="login-form" class=" bg-light shadow-sm p-3">
     <h2 class="my-3">Log in</h2>
 
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-      <div class="field my-2">
+      <div class="form-group my-3">
         <%= f.label :email %><br />
-        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
       </div>
 
-      <div class="field my-2">
+      <div class="form-group my-3">
         <%= f.label :password %><br />
-        <%= f.password_field :password, autocomplete: "current-password" %>
+        <%= f.password_field :password, autocomplete: "current-password", class: "form-control" %>
       </div>
 
       <% if devise_mapping.rememberable? %>
-        <div class="field my-2">
-          <%= f.check_box :remember_me %>
-          <%= f.label :remember_me %>
+        <div class="form-group">
+          <%= f.check_box :remember_me, class: "form-check-input"%>
+          <%= f.label :remember_me, class: "form-check-label" %>
         </div>
       <% end %>
 
-      <div class="actions mb-4">
-        <%= f.submit "Log in" %>
+      <div class="actions form-group my-3">
+        <%= f.submit "Log in", :class => "form-control"%>
       </div>
     <% end %>
 
@@ -29,4 +29,6 @@
 
     <%= link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path, method: :post %>
   </div>
+  
 </div>
+<div class="login-footer text-muted w-100 p-2">A project by <a href="https://github.com/emarjani" target="_blank">@emarjani</a></div>

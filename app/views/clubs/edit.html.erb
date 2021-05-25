@@ -1,5 +1,6 @@
 <%=render "club_form", club: @club, form_title: "Edit Club"%>
 
-<div id="delete-club" class="">
-    <%=button_to "Delete club", club_path(@club), method: :delete, data: {confirm: "Are you sure?"}, class: "button"%>
+<div id="delete-club" class="bg-light p-3">
+    <p>Deleting a club will permanently remove all posts and chatroom history. Are you sure?</p>
+    <%=button_to "Delete club", club_path(@club), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger btn-sm"%>
 </div>

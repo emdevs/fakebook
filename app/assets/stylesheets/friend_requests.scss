@@ -2,87 +2,74 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
+@import 'colors';
 
 .friend-requests {
-    // border: 1px solid;
-    margin: 2rem 4rem 2rem 4rem;
+    h4 {
+        background-color: $fb-dark;
+    }
+
+    .new-users {
+        h4 {
+            color: $fb-color;
+        }
+    }
 
     .notfriend-column {
-        // background-color:rgba(78, 103, 150, 0.8);
-        // background-color: rgb(103, 135, 194);
         min-width: 70%;
-
+        
+        //view profile links
+        .view-profile {
+            font-size: 0.9rem;
+        }
 
         //buttons
         .cancel-button, .invite-button {
             border: none;
             outline: none;
-            border-radius: 3px;
         }
 
 
         .cancel-button:hover {
-            background-color: rgb(240, 99, 99);
+            background-color: $muted-red;
+            color: white;
         }
 
-        .invite-button:hover {
-            background-color: rgb(118, 211, 118);
+        .success-button:hover {
+            background-color: $muted-green;
+            color: white;
         }
 
-
-
-        /////////
-
-        .profile-link {
-            font-size: 14px;
-            text-decoration: none;
+        .incoming-requests, .sent-requests {
+            background-color: $chat-background;
         }
 
-        .sent-requests, .new-users {
-            // border: 4px rgb(76, 113, 184) solid;
-            background-color: rgb(103, 139, 206);
-            // background-color: rgba(146, 172, 221, 0.377);
-            .sent-request, .new-user {
-                border-radius: 5px;
+        .new-users{
+            background-color: $fb-dark;
+        }
+
+        .new-users-container {
+            display: grid;
+            grid-template: auto / repeat(4, 1fr);
+
+            @media screen and (max-width: 768px) {
+                grid-template: auto / repeat(3, 1fr);
             }
+            
         }
 
-        .sent-requests {
-            min-height: 100px;
-        }
-        .new-users {
-            min-height: 300px;
-        }
-
-        
     }
 
     #friend-column {
         min-width: 260px;
 
         .friend-card{
-            // border: 1px blue solid;
 
+            
             .info {
                 margin-left: 0.5em;
             }
         }
-
-        .links {
-
-            .unfriend {
-                text-decoration: none;
-                color: white;
-                background-color: rgb(194, 32, 32);
-                // border-radius: 5px;
-                font-size: 12px;
-                // padding: 0.2em;
-            }
-        }
-        // border: 1px blue solid;
-    }
-
-    .button {
-        border: none;
     }
 }
+

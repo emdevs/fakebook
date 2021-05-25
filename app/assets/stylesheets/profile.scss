@@ -1,31 +1,82 @@
 // Place all the styles related to the profile controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+@import 'colors';
+@import 'frame';
 
 #profile {
-    min-width: 600px;
-    max-width: 700px;
-    border-radius: 5px;
+    width: 700px;
 
-    .profile-pic {
-        max-width: 180px;
-        max-height: 180px;
-        border-radius: 50%; 
-        -webkit-user-drag: none;
+    .header {
+        #profile-background {
+            min-height: 140px;
+            background-color: $fb-dark;
+        }
+        .bottom-container  {
+            min-height: 140px;
+        
+        }
 
-        &:hover {
-            transform: scale(1.05);
-            transition: transform .15s;
+        .header-info {
+            // border: 2px green solid;
+            top: 50%;
+            left: 15%;
+            transform: translate(-10%, -50%);
+
+            .user-info {
+                min-width: 300px;
+                .name {
+                    bottom: 50%;
+                }
+                .other-info {
+                    top: 50%;
+
+                    .gender img { width: 25px }
+                    .bday img { width: 23px }
+                }
+            }
+        }
+    }
+
+    //profile pic
+    .square-frame {
+        min-height: 180px;
+        min-width: 180px;
+        border: 4px solid white;
+        border-radius: 50%;
+
+        @media screen and (max-width: 768px) {
+            min-width: 130px;
+            min-height: 130px;
+        }
+
+        img {
+            border-radius: 50%;
+            -webkit-user-drag: none;
+        }
+    }
+
+    .bio {
+        background-color: $chat-background;
+    }
+
+    #profile-links {
+        bottom: 0;
+        .links {
+            text-decoration: none;
         }
     }
 }
 
+#edit-profile {
+    .profile-form-container {
+        width: 50%;
+        @media screen and (max-width: 768px) {
+            width: 80%;
+        }
+    }
 
-
-
-@media only screen and (max-width: 768px) {
-    #profile {
-        max-width: 90%;
-        min-width: none;
+    .text-area {
+        min-height: 200px;
     }
 }

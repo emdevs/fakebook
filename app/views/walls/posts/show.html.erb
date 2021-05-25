@@ -1,30 +1,34 @@
 <div id="post-container" class="d-flex justify-content-center">
-    <div id="post" class="bg-light d-flex flex-column mt-3 p-3 shadow">
-        <h1><%=@post.title%></h1>
+    <div class="post bg-light d-flex flex-column p-3 shadow-sm">
+        <h2 class=""><%=@post.title%></h2>
 
         <%if @post.image.attached?%>
-            <img class="post-img" src="<%=url_for(@post.image)%>">
+            <img class="post-img w-100" src="<%=url_for(@post.image)%>">
         <%end%>
 
         <div>
-            <%=@post.body%>
-            <p>Likes: <%=@post.likes.count%></p>
+            <p class="my-2"><%=@post.body%></p>
+            <div class="d-flex justify-content-between align-items-center">
+                <p class="m-0">Likes: <%=@post.likes.count%></p>
+
+                <%if current_user.id == @post.user_id%>
+                    <div class="links">
+                        <%=link_to "Edit", edit_wall_post_path(@post)%>
+                        <%=link_to "Delete", wall_post_path(@post), method: :delete, data: {confirm: "Are you sure?"}%>
+                    </div>
+                <%else%>
+                    <%if @post.liked?(current_user) %>
+                        <%=button_to "Unlike", unlike_post_path, method: :delete, class: "btn btn-light border"%>
+                    <%else%>
+                        <%=button_to "Like", like_post_path, method: :post, class: "btn btn-light border"%>
+                    <%end%>
+                <%end%>
+            </div>
         </div>
 
-        <%if current_user.id == @post.user_id%>
-            <div class="links">
-                <%=link_to "Edit", edit_wall_post_path(@post)%>
-                <%=link_to "Delete", wall_post_path(@post), method: :delete, data: {confirm: "Are you sure?"}%>
-            </div>
-        <%else%>
-            <%if @post.liked?(current_user) %>
-                <%=button_to "Unlike", unlike_post_path, method: :delete %>
-            <%else%>
-                <%=button_to "Like", like_post_path, method: :post%>
-            <%end%>
-        <%end%>
+        
 
-        <div class="comments-section mt-2">
+        <div class="comments-section mt-4">
             <%=render "comments/comment_form", comment: @comment, route: wall_post_comments_path(@post)%>
             <%=render partial: "comments/comment_section", locals: {post_id: @post.id} %>
         </div>

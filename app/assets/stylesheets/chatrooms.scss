@@ -7,7 +7,7 @@
     max-width: 75%;
 
     h4 {
-        background-color: $fb-color;
+        background-color: $fb-dark;
     }
 
     .chatroom-chat {
@@ -19,10 +19,6 @@
         .message {
             .meta-info{
                 font-size: 0.75rem;
-                
-                .name {
-                    color: rgb(33, 33, 163);
-                }
             }
         }
     }    

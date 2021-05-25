@@ -7,8 +7,6 @@ consumer.subscriptions.create("OnlineChannel", {
   },
 
   received(data) {
-
-    console.log(data);
     let online_icons = document.getElementsByClassName("online-icon");
 
     for (let i=0; i < online_icons.length; i++) {

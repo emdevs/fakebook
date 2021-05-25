@@ -14,9 +14,7 @@
  *= require_self
  */
 @import 'colors';
-
-
-$fb-color: rgb(121, 158, 207);
+@import 'frame';
 
 #fb-logo {
     max-height: 60px;
@@ -32,18 +30,35 @@ $fb-color: rgb(121, 158, 207);
         text-decoration: none;
     }
     .link:hover {
-        color: rgb(23, 0, 77);
+        color: rgb(41, 23, 82);
+    }
+    nav {
+        @media screen and (max-width: 768px) {
+            flex-direction: column;
+            align-items: center;
+        }
     }
 }
 
-.shadow {box-shadow: 2px 2px 5px rgb(150, 150, 150);}
 
 body {
     min-height: 100vh;
     background-color: rgb(197, 212, 231);
-    // background-image: linear-gradient(rgb(218, 225, 240), rgb(151, 179, 214), rgb(80, 138, 214));
 }
 
+//Square frame
+
+.square-frame {
+    @include frame;
+    min-width: 70px;
+}
+
+.square-frame:after {
+    @include frame-after;
+    padding-bottom: 100%; /* The padding depends on the width, not on the height, so with a padding-bottom of 100% you will get a square */
+}
+
+//Online/Offline icon styling
 
 .online-icon {
     width: 0.5rem;
@@ -62,30 +77,13 @@ body {
 .isOffline {
     background-color: rgb(192, 57, 57);
 
-    // -webkit-box-shadow:0 0 0.3rem rgb(226, 61, 61); 
-    // -moz-box-shadow: 0 0 0.3rem rgb(226, 61, 61); 
-    // box-shadow:0 0 0.3rem rgb(226, 61, 61); 
+    -webkit-box-shadow:0 0 0.3rem rgb(226, 61, 61); 
+    -moz-box-shadow: 0 0 0.3rem rgb(226, 61, 61); 
+    box-shadow:0 0 0.3rem rgb(226, 61, 61); 
 }
 
+.profile-link {
+    text-decoration: none;
+    color: rgb(29, 29, 29);
+}
 
-// #footer {
-//     background-color:rgba(218, 225, 240, 0.4);
-//     width: 100%;
-//     position: fixed;
-//     bottom: 0;
-
-//     #footer-link {
-//         text-decoration: none;
-//     }
-//     #footer-link:hover {
-//         //probably should use variable for colors like this
-//         color: rgb(20, 13, 90);    
-//     }
-    
-// }
-
-// @media only screen and (max-width: 768px) {
-//     .login-form {
-//         min-width: 70%;
-//     }
-// }
