@@ -287,7 +287,7 @@ DEPENDENCIES
   rack-mini-profiler (~> 2.0)
   rails (~> 6.1.1)
   rails-erd
-  redis
+  redis (~> 4.0)
   sass-rails (>= 6)
   selenium-webdriver
   spring
