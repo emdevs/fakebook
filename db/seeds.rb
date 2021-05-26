@@ -5,3 +5,11 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+#Create a wall (App cannot run without a wall model instance)
+Wall.create()
+
+#Later seed with devise users, clubs, posts etc.
+
+
+
