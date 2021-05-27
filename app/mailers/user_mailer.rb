@@ -3,7 +3,7 @@ class UserMailer < ApplicationMailer
 
     def welcome_email(params)
         @user = params[:user]
-        @url = "http://localhost:3000/"
+        @url = "https://fakebook-site.herokuapp.com/"
         mail(to: @user[:email], subject: "Welcome to Fakebook!")
     end
 end

@@ -67,4 +67,5 @@ gem 'omniauth-rails_csrf_protection'
 
 gem 'figaro'
 
+gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
 # gem 'redis'

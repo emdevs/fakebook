@@ -12,10 +12,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     super
-    #if a user was created (checks if the unique email is in db); 
-    unless User.find_by(email: params[:user][:email]).nil?
-      UserMailer.welcome_email(params).deliver_now!
-    end
+    # if a user was created (checks if the unique email is in db); 
+    # unless User.find_by(email: params[:user][:email]).nil?
+    #   UserMailer.welcome_email(params).deliver_now!
+    # end
   end
 
   # GET /resource/edit
@@ -56,12 +56,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # The path used after sign up.
-  # def after_sign_up_path_for(resource)
-  #   super(resource)
-  # end
+  def after_sign_up_path_for(resource)
+    # super(resource)
+    '/wall/posts'
+  end
 
   # The path used after sign up for inactive accounts.
-  # def after_inactive_sign_up_path_for(resource)
-  #   super(resource)
-  # end
+  def after_inactive_sign_up_path_for(resource)
+    # super(resource)
+    'wall/posts'
+  end
 end
