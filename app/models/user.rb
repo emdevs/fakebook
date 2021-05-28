@@ -115,19 +115,14 @@ class User < ApplicationRecord
 
 
   def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+    where(provider: auth.provider, uid: auth.uid).first_or_create! do |user|
       user.email = auth.info.email
       user.password = Devise.friendly_token[0, 20]
       user.name = auth.info.name
-      #if fb gender is something other than male/female, need to set it to :other
-      user.gender = auth.extra.raw_info.gender
 
-      if auth.extra.raw_info.birthday.nil?
-        #default bday value (1st Jan, 18 years old)  if fb bday can't be retrieved
-        user.birth_date = Date.strptime("#{DateTime.now.year-18}/01/01", "%Y/%m/%d")
-      else
-        user.birth_date = auth.extra.raw_info.birthday
-      end
+      #Currently not allowed to access gender and birthday of FB user without App Review.
+      user.gender = "male"
+      user.birth_date = Date.strptime("#{DateTime.now.year-18}/01/01", "%Y/%m/%d")
       # assuming the user model has a name
       # user.image = auth.info.image # assuming the user model has an image
       # If you are using confirmable and the provider(s) you use validate emails, 
