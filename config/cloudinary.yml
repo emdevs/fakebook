@@ -1,0 +1,6 @@
+production:
+  cloud_name: "do9inmnwh"
+  api_key: <%= ENV.fetch("cloudinary_key") %>
+  api_secret: <%= ENV.fetch("cloudinary_secret") %>
+  secure: true
+  cdn_subdomain: true
