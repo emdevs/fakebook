@@ -5,6 +5,20 @@
 @import 'colors';
 @import 'frame';
 
+
+// new club and new club post buttons
+#new-club-post {
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    right: 0;
+}
+
+#new-club-button {
+    width: fit-content;
+}
+
+
 //clubs index
 
 #clubs {
@@ -34,21 +48,6 @@
     }
 }
 
-#new-club-button {
-    width: 70px;
-    height: 70px;
-    background-color: $fb-dark;
-    right: 0;
-    bottom: 0;
-
-    a {
-        min-width: 60px;
-        font-size: 45px;
-        font-weight: 600;
-        color: white;
-        text-decoration: none;
-    }
-}
 
 //club card frame
 .club-card-frame {
@@ -71,11 +70,6 @@
     padding-bottom: 30%; /* The padding depends on the width, not on the height, so with a padding-bottom of 100% you will get a square */
 }
 
-#new-club-button {
-    background-color: $fb-dark;
-    position: fixed;
-    bottom: 0;
-}
 
 //club#show
 
@@ -132,8 +126,6 @@
         background-color: rgb(194, 32, 32);
     }
 }
-
-
 
 
 

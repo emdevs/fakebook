@@ -1,6 +1,6 @@
 
-<div class="pass-form-container">
-  <div class="pass-form bg-light p-3 mx-auto mt-5 shadow-sm">
+<div class="pass-form-container border flex-grow-1 d-flex justify-content-center">
+  <div class="pass-form bg-light p-3 shadow-sm">
     <h3>Forgot your password?</h3>
 
     <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>

@@ -1,7 +1,7 @@
 <%=form_with model: @post, url: wall_post_path(@post.id) do |form|%>
     <%# same content as _post_form partial %>
 
-    <div class="form-container p-3 my-5 bg-light">
+    <div class="form-container my-4 p-3 bg-light">
         <h2>Edit Wall Post</h2>
 
         <div class="post-errors">
@@ -21,12 +21,12 @@
 
         <div class="form-group my-2">
             <%=form.label :body%>
-            <%=form.text_area :body, class: "form-control"%>
+            <%=form.text_area :body, class: "form-control body"%>
         </div>
 
         <div class="form-group my-2">
             <%=form.label :image%>
-            <%=form.file_field :image, class: "form-control"%>
+            <%=form.file_field :image, class: "file-field form-control"%>
             <small class="form-text text-muted">(Optional)</small>
         </div>
 

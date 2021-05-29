@@ -4,7 +4,7 @@
             <h4 class="bg-light shadow-sm border m-0 p-2">Chats</h4>
             <div id="chat-partners" class="p-2">
                 <%@chat_partners.each do |user|%>
-                    <div class="chat-partner d-flex bg-light justify-content-between align-items-center my-2 p-2 shadow-sm rounded">
+                    <div class="chat-partner d-flex bg-light justify-content-between align-items-center my-2 p-2 shadow-sm">
                         <%chat = current_user.chat_with(user.id) %>
                         <%=link_to "#{user.name}", user_profile_path(user), class: "profile-link"%>
                         <%=link_to "Chat", chat_path(chat), remote: true, class: ""%>

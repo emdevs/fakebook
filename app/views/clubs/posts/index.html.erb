@@ -1,10 +1,11 @@
-<div class="d-flex justify-content-center">
+<div id="club-posts" class="position-relative d-flex justify-content-center">
+    
+    <div id="new-club-post" class="plus-button">
+        <%=link_to "", new_club_post_path(@club), class: "link" %>
+        <img class="" src="<%=asset_path("icons8-plus-96.png")%>">
+    </div>
 
-    <button class="post-button d-flex justify-content-center align-items-center rounded-circle border border-white">
-        <%=link_to "+", new_club_post_path(@club), class:"text"%>
-    </button>
-
-    <div id="main-posts" class="d-flex flex-column">
+    <div id="main-posts" class="w-100 d-flex flex-column align-items-center">
         <%@posts.each do |post|%>
             <div class="post d-flex flex-column bg-white shadow-sm m-2 p-3">
                 <div class="author-info d-flex">

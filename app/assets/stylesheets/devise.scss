@@ -1,20 +1,28 @@
-#login-form {
-    min-width: 300px;
-    min-height: 400px;
-}
 
 //forgotten password
 .pass-form {
-    width: fit-content;
+    width: 500px;
+    height: 300px;
+    max-width: 90%;
+    margin-top: 5rem;
+
 }
 
 //signup form
 .signup-form {
-    min-width: 500px;
-    max-width: 500px;
+    width: 500px;
+    max-width: 90%;
 }
 
-// routing to /users will give error. route this to some other webpage instead
+
+//login
+
+#login-form {
+    width: 350px;
+    min-height: 400px;
+    max-width: 90%;
+}
+
 
 .login-footer {
     background-color: rgba(172, 172, 172, 0.2);
@@ -24,10 +32,3 @@
     }
 }
 
-// #edit-user-container {
-//     // border: 3px pink solid;
-// }
-
-// #edit-user {
-//     // border: 2px green solid;
-// }

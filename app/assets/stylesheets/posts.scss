@@ -6,13 +6,23 @@
 
 @import 'colors';
 
-#main-posts .post {
-    width: 500px;
+.form-container {
+    width: 700px;
+    max-width: 90%;
+    margin: 0 auto;
+
+    .body {
+        min-height: 150px;
+    }
+    .file-field {
+        width: fit-content;
+    }
 }
 
-.form-container {
-    width: fit-content;
-    margin: 0 auto;
+#post-container {
+    .body {
+        font-size: 1rem;
+    }
 }
 
 .submit-button {

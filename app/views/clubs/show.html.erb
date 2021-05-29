@@ -41,7 +41,7 @@
                         <%=link_to "#{member.name}", user_profile_path(member), class: "profile-link"%>
 
                         <%if @club.owner.id == member.id%>
-                            <span class="badge align-self-center mx-2">Owner</span>
+                            <span class="badge align-self-center mx-1">Owner</span>
                         <%end%>
                     </div>
 

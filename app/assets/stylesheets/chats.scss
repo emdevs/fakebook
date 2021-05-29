@@ -47,7 +47,10 @@ $chats-body-height: 75vh;
     #partners-container {
         background-color: $fb-color;
         height: $chats-body-height;
-
+        
+        h4 {
+            color: $fb-dark;
+        }
         #chat-partners {
             overflow-y: auto;
         }

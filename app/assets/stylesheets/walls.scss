@@ -2,6 +2,8 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
+@import 'colors';
+
 .post-button {
     height: 70px;
     width: 70px;
@@ -9,12 +11,11 @@
     position:sticky;
     top: 2rem;
     margin: 1rem 2rem 1rem 2rem;
-
-    padding: 0;
-    background-color:rgb(103, 135, 194);
+    background-color: $fb-dark;
 
     .text {
-        min-width: 60px;
+        // height: fit-content;
+        line-height: 0;
         font-size: 45px;
         font-weight: 600;
         color: white;
@@ -26,7 +27,11 @@
     }
 }
 
-
+#main-posts {
+    // same as post witdth and max width
+    width: 600px;
+    max-width: 100%;
+}
 
 #friend-column {
     background-color: rgba(226, 226, 226, 0.2);
@@ -46,9 +51,12 @@
 }
 
 
+
+// Post#show for wall and club and post#index
+
 .post {
-    min-width: 500px;
-    max-width: 550px;
+    width: 600px;
+    max-width: 95%;
 
     .author-info {
         .square-frame {
@@ -75,8 +83,8 @@
     }
     
     .post-pic {
-        min-width: 100%;
-        max-width: 200px;
+        width: 100%;
+        height: auto;
     }
 }
 
@@ -89,13 +97,5 @@
 @media only screen and (max-width: 1000px) {
     #friend-column {
         display: none !important;
-    }
-}
-
-
-@media only screen and (max-width: 768px) {
-
-    #post {
-        min-width: 80%;
     }
 }

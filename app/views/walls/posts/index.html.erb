@@ -1,12 +1,12 @@
 <div id="homepage" class="d-flex justify-content-center">
-    
-    <button class="post-button d-flex justify-content-center align-items-center rounded-circle border border-white">
-        <%=link_to "+", new_wall_post_path, class:"text"%>
-    </button>
-    
-    <div id="main-posts" class="d-flex flex-column">
+    <div class="plus-button">
+        <%=link_to "", new_wall_post_path, class: "link" %>
+        <img class="" src="<%=asset_path("icons8-plus-96.png")%>">
+    </div>
+
+    <div id="main-posts" class="d-flex flex-column align-items-center">
         <%@posts.each do |post|%>
-            <div class="post d-flex flex-column bg-white shadow-sm m-2 p-3">
+            <div class="post d-flex flex-column bg-white shadow-sm mb-4 p-3">
 
                 <div class="author-info d-flex">
                     <div class="square-frame">
@@ -35,7 +35,7 @@
         <%end%>
     </div>
 
-    <div id="friend-column" class="d-flex flex-column justify-content-start m-2">
+    <div id="friend-column" class="d-flex flex-column justify-content-start">
         <p class="bg-light text-secondary border p-2 mb-1">Friends</p>
         <%current_user.friends.each do |friend|%>
             <%online_icon_class = (friend.status.online === true)? "isOnline" : "isOffline"%>
@@ -50,7 +50,7 @@
 
                     <div class="d-flex justify-content-between align-items-center">
                         <%=link_to "#{friend.name}", user_profile_path(friend), class: "profile-link"%>
-                        <div class="online-icon <%=online_icon_class%> ms-2" data-user-id="<%=friend.id%>"></div>
+                        <div class="online-icon <%=online_icon_class%> ms-2 me-1" data-user-id="<%=friend.id%>"></div>
                     </div>
 
                     <div class="links">

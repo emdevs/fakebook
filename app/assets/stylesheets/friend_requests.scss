@@ -5,6 +5,18 @@
 @import 'colors';
 
 .friend-requests {
+    display: grid;
+    grid-template: auto / 4fr 1fr;
+    grid-gap: 1rem;
+
+    @media screen and (max-width: 1025px) {
+        grid-template: auto/ 3fr 1fr;
+    }
+
+    @media screen and (max-width: 768px) {
+        grid-template: auto / auto;
+    }
+
     h4 {
         background-color: $fb-dark;
     }
@@ -16,7 +28,7 @@
     }
 
     .notfriend-column {
-        min-width: 70%;
+        // min-width: 75%;
         
         //view profile links
         .view-profile {
@@ -50,8 +62,11 @@
 
         .new-users-container {
             display: grid;
-            grid-template: auto / repeat(4, 1fr);
+            grid-template: auto / repeat(5, 1fr);
 
+            @media screen and (max-width: 1025px) {
+                grid-template: auto / repeat(4, 1fr);
+            }
             @media screen and (max-width: 768px) {
                 grid-template: auto / repeat(3, 1fr);
             }
@@ -60,15 +75,9 @@
 
     }
 
-    #friend-column {
-        min-width: 260px;
-
-        .friend-card{
-
-            
-            .info {
-                margin-left: 0.5em;
-            }
+    .friend-card{
+        .links {
+            font-size: 0.9rem;
         }
     }
 }

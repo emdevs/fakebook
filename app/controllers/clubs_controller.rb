@@ -15,11 +15,13 @@ class ClubsController < ApplicationController
     end
 
     def create
-        #if new club is created, auto create membership for owner?
         @club = current_user.owned_clubs.build(club_params)
 
         if @club.save
             flash[:alert] = "Club successfully created."
+            #automatically create membership for owner
+            Membership.create(member_id: current_user.id, club_id: @club.id)
+
             redirect_to @club
         else
             render :new

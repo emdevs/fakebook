@@ -1,31 +1,43 @@
 <div id="post-container" class="d-flex justify-content-center">
     <div class="post bg-light d-flex flex-column p-3 shadow-sm">
-        <h2 class=""><%=@post.title%></h2>
+
+        <div class="author-info d-flex mb-3">
+            <%@user = @post.user%>
+            <div class="square-frame">
+                <img class="" src="<%=asset_path(url_for(@user.profile.attached_img))%>">
+            </div>
+            <div class="d-flex flex-column mx-2">
+                <%=link_to "#{@user.name}", user_profile_path(@user), class: "profile-link"%>
+                <p class="date m-0"><%=@post.date%></p>
+            </div>
+        </div>
+
+        <div>
+            <h3 class="mt-2"><%=@post.title%></h3>
+            <p class="mt-2 mb-4 body"><%=@post.body%></p>
+        </div>
 
         <%if @post.image.attached?%>
             <img class="post-img w-100" src="<%=url_for(@post.image)%>">
         <%end%>
 
-        <div>
-            <p class="my-2"><%=@post.body%></p>
-            <div class="d-flex justify-content-between align-items-center">
-                <p class="m-0">Likes: <%=@post.likes.count%></p>
 
-                <%if current_user.id == @post.user_id%>
-                    <div class="links">
-                        <%=link_to "Edit", edit_wall_post_path(@post)%>
-                        <%=link_to "Delete", wall_post_path(@post), method: :delete, data: {confirm: "Are you sure?"}%>
-                    </div>
+        <div class="d-flex justify-content-between align-items-center mt-2">
+            <p class="m-0">Likes: <%=@post.likes.count%></p>
+
+            <%if current_user.id == @post.user_id%>
+                <div class="links">
+                    <%=link_to "Edit", edit_wall_post_path(@post)%>
+                    <%=link_to "Delete", wall_post_path(@post), method: :delete, data: {confirm: "Are you sure?"}%>
+                </div>
+            <%else%>
+                <%if @post.liked?(current_user) %>
+                    <%=button_to "Unlike", unlike_post_path, method: :delete, class: "btn btn-light border"%>
                 <%else%>
-                    <%if @post.liked?(current_user) %>
-                        <%=button_to "Unlike", unlike_post_path, method: :delete, class: "btn btn-light border"%>
-                    <%else%>
-                        <%=button_to "Like", like_post_path, method: :post, class: "btn btn-light border"%>
-                    <%end%>
+                    <%=button_to "Like", like_post_path, method: :post, class: "btn btn-light border"%>
                 <%end%>
-            </div>
+            <%end%>
         </div>
-
         
 
         <div class="comments-section mt-4">
