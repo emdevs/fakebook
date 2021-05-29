@@ -48,6 +48,14 @@
             <%=form.label :image%>
             <%=form.file_field :image, class: "form-control", direct_upload: true%>
             <small class="form-text text-muted">(Optional)</small>
+
+            <%unless club.errors[:image].empty?%>
+                <div class="alert alert-danger p-0">
+                    <%club.errors[:image].each do |msg|%>
+                        <li class="px-2"><%=msg%></li>
+                    <%end%>
+                </div>
+            <%end%>
         </div>
 
         <%=form.hidden_field :owner_id, value: current_user.id%>

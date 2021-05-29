@@ -1,4 +1,8 @@
 class Post < ApplicationRecord
+    
+    include ActiveModel::Validations
+    validates_with ImageValidator
+
     validates :title, presence: true, length: {minimum: 5}
     validates :body, presence: true, length: {minimum: 10}
 
@@ -16,7 +20,6 @@ class Post < ApplicationRecord
         self.likes.find{|like| like.user_id == user.id}
     end
 
-    #time created is..wrong??
     def date
         self.created_at.strftime("%d-%m-%Y %H:%M")
     end

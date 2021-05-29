@@ -1,14 +1,13 @@
 class Profile < ApplicationRecord
-    #attach profile pic
-    # before_create :image_nil?
-    include ActionView::Helpers::UrlHelper
+    # include ActionView::Helpers::UrlHelper
+    include ActiveModel::Validations
+    validates_with ImageValidator
 
-    has_one_attached :profile_pic
+    has_one_attached :image
     belongs_to :user
 
-
     def attached_img
-        img_path = (self.profile_pic.attached?)? self.profile_pic : "default.png"
+        img_path = (self.image.attached?)? self.profile_pic : "default.png"
     end
 
 end

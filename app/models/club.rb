@@ -1,4 +1,8 @@
 class Club < ApplicationRecord
+
+    include ActiveModel::Validations
+    validates_with ImageValidator
+    
     validates :owner_id, presence: true
     validates :name, presence: true, length: {minimum: 5}
     validates :description, presence: true, length: {minimum: 10}
