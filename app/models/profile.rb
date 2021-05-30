@@ -7,7 +7,7 @@ class Profile < ApplicationRecord
     belongs_to :user
 
     def attached_img
-        img_path = (self.image.attached?)? self.profile_pic : "default.png"
+        img_path = (self.image.attached?)? self.image : "default.png"
     end
 
 end
