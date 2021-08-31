@@ -71,3 +71,5 @@ gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'mast
 # gem 'redis'
 
 gem 'cloudinary'
+
+gem 'local_time'
