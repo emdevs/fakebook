@@ -42,13 +42,12 @@ document.addEventListener('turbolinks:load', function() {
                 },
             
                 createLine(data) {
-                    
                     return `
                         <div class="message bg-light shadow-sm p-2 m-2 rounded">
                             <div class="text">
                                 <div class="meta-info d-flex">
                                     <p class="name m-0 text-primary">${data["user"]["name"]}</p>
-                                    <p class="datetime m-0 px-2 text-muted">${data["datetime"]}</p>
+                                    <p class="datetime m-0 px-2 text-muted">${"a few seconds ago"}</p>
                                 </div>
                                 <p class="msg m-0">${data["message"]["message"]}</p>
                             </div>

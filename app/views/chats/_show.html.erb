@@ -15,7 +15,7 @@
             <div class="message rounded shadow-sm px-2 py-1 m-2 <%=add_styling%>">
                 <div class="text">
                     <div class="meta-info">
-                        <p class="datetime text-muted m-0"><%=msg.datetime%></p>
+                        <p class="datetime text-muted m-0"><%=local_time(msg.created_at, "%d-%m-%Y %H:%M") %></p>
                     </div>
                     <p class="msg"><%=msg.message%></p>
                 </div>

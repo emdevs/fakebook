@@ -48,7 +48,9 @@ document.addEventListener('turbolinks:load', function() {
                 
                             private_chat.scrollTo({ top: private_chat.scrollHeight, behavior: 'smooth' });
                         },
-                    
+                        
+
+                        //timestamps of messages don't auto update. 
                         createLine(data) {
                             let styling = (partner_id == data["message"]["user_id"])? "them" : "me";
     
@@ -56,7 +58,7 @@ document.addEventListener('turbolinks:load', function() {
                                 <div class="message rounded shadow-sm px-2 py-1 m-2 ${styling}">
                                     <div class="text">
                                         <div class="meta-info">
-                                            <p class="datetime text-muted m-0">${data["datetime"]}</p>
+                                            <p class="datetime text-muted m-0">${"a few seconds ago"}</p>
                                         </div>
                                         <p class="msg">${data["message"]["message"]}</p>
                                     </div>

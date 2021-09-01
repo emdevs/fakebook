@@ -7,7 +7,7 @@
                 <div class="text">
                     <div class="meta-info d-flex">
                         <p class="name m-0 text-primary"><%=msg.user.name%></p>
-                        <p class="datetime m-0 px-2 text-muted"><%=msg.datetime%></p>
+                        <p class="datetime m-0 px-2 text-muted"><%=local_time(msg.created_at, "%d-%m-%Y %H:%M") %></p>
                     </div>
                     <p class="msg m-0"><%=msg.message%></p>
                 </div>

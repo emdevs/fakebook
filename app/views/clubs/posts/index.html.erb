@@ -14,7 +14,7 @@
                     </div>
                     <div class="d-flex flex-column mx-2">
                         <%=link_to "#{post.user.name}", user_profile_path(post.user), class: "profile-link"%>
-                        <p class="date m-0"><%=post.date%></p>
+                        <p class="date m-0"><%=local_time_ago(post.created_at) %></p>
                     </div>
                 </div>
 

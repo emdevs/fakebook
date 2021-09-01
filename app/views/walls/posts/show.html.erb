@@ -8,7 +8,7 @@
             </div>
             <div class="d-flex flex-column mx-2">
                 <%=link_to "#{@user.name}", user_profile_path(@user), class: "profile-link"%>
-                <p class="date m-0"><%=@post.date%></p>
+                <p class="date m-0"><%=local_time(@post.created_at, "%d-%m-%Y %H:%M") %></p>
             </div>
         </div>
 

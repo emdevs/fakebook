@@ -5,7 +5,7 @@
     <%@post.comments.each do |comment|%>
         <div class="comment p-2 border-bottom">
             <%=link_to "#{comment.user.name}", user_profile_path(comment.user), class: "fw-bold profile-link"%>
-            <i class="text-muted date"><%=comment.date%></i>
+            <i class="text-muted date"><%=local_time(comment.created_at, "%d-%m-%Y %H:%M") %></i>
             <p>Likes: <%=comment.likes.count%></p>
             <%=comment.body%>
 
