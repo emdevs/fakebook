@@ -30,7 +30,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # DELETE /resource
   def destroy
-    current_user.profile.profile_pic.purge
+    begin
+      #profile_pic attribute may not exist for profile.
+      current_user.profile.profile_pic.purge
+    rescue
+      #fail silently
+    end
     super
   end
 

@@ -1,12 +1,16 @@
 class User < ApplicationRecord
+  include ActiveModel::Validations
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
           :recoverable, :rememberable, :validatable
   devise :omniauthable, omniauth_providers: %i[facebook]
+  
+  validates_with UserValidator
 
   validates :name, length: {minimum: 2}
-  validates :birth_date, presence: true, if: :validate_age?
+  validates :birth_date, presence: true
   # validates :gender, presence: true (FB signup will fail since cannot retrieve gender (for now, it returns nil))
   after_create :create_profile, :create_status
 
@@ -60,13 +64,6 @@ class User < ApplicationRecord
     self.chats_as_user_1.where(user_2_id: partner_id).or(
       self.chats_as_user_2.where(user_1_id: partner_id)
     ).first
-  end
-
-
-  def validate_age?
-    if birth_date.present? && (birth_date + 13.years >= Date.today)
-      errors.add(:birth_date, '(you should be at least 13 years old)')
-    end
   end
 
   def age
