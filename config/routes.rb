@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   resources :chats, only: [:index, :show]
 
   resources :friend_requests, only: [:new, :create, :index, :destroy, :update]
+  get "/friend_requests/search", to: "friend_requests#search", as: "search_users"
 
   #Like and unlike paths
   post "/posts/:id/like", to: "posts#like", as: "like_post" 

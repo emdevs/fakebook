@@ -1,11 +1,29 @@
 class FriendRequestsController < ApplicationController
     #all possible people you can send requests to 
     def index
-        @new_users = current_user.can_send_request
+        @new_users = default_users(10)
         
         @pending_users = current_user.pending_invitees
         @invites_from = current_user.invites_from
     end
+
+    def search
+        #current user will not be returned as a result
+        query = params[:query]
+        
+        #loads 10 users that aren't friends with current_user by default. 
+        @users = default_users(10)
+
+        if query != "" 
+            @users = User.find_by_sql("SELECT * FROM users WHERE UPPER(name) LIKE UPPER('%#{query}%') AND id <> #{current_user.id}")
+        end
+
+        respond_to do |format|
+            format.js {render layout: false}
+        end
+    end
+
+
 
     def create
         @request = current_user.sent_friend_requests.build(friend_request_params)
@@ -40,6 +58,11 @@ class FriendRequestsController < ApplicationController
     end
 
     private
+
+    #returns 10 default users (users you can send request to)
+    def default_users(limit)
+        return current_user.can_send_request.limit(limit)
+    end
 
     def friend_request_params
         params.permit(:reciever_id)

@@ -78,33 +78,38 @@ class User < ApplicationRecord
     total_ids = ids_as_reciever + ids_as_requester
   end
 
-  def friends?(user)
-  end
+  # def friends?(user)
+  # end
 
   def friends
     User.where(id: self.friends_ids)
   end
 
   #friendship (grabs invite for a certain friendship.)
-  #find a ay to shorten this maybe
   def friendship(friend)
     FriendRequest.where(requester_id: self.id, reciever_id: friend.id, status: true).or(FriendRequest.where(reciever_id: self.id, requester_id: friend.id, status: true)).first
   end
 
+  #check if one party sent a request to the other (or vice versa). Includes pending requests and friendships. 
+  def friend_request_with(user)
+    return FriendRequest.where(requester_id: self.id, reciever_id: user.id).or(FriendRequest.where(requester_id: user.id, reciever_id: self.id))
+  end
 
-  #can probabyl shorten this, is repetetive
 
+  #Users that current_users is not friends with, and has no pending 
   def can_send_request
     a = FriendRequest.where(requester_id: self.id, status: false).pluck(:reciever_id)
     b = FriendRequest.where(reciever_id: self.id, status: false).pluck(:requester_id)
     User.where.not(id: [a+b+self.friends_ids+[self.id]])
   end
 
+  #Users that current_user has sent an unanswered invite to
   def pending_invitees
     ids = FriendRequest.where(requester_id: self.id, status: false).pluck(:reciever_id)
     User.where(id: ids)
   end
 
+  #Users that current_user has recieved an unanswered invite from
   def invites_from
     ids = FriendRequest.where(reciever_id: self.id, status: false).pluck(:requester_id)
     User.where(id: ids)

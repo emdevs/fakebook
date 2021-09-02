@@ -40,7 +40,13 @@
         </div>
 
         <div class="new-users">
-            <h4 class="bg-light shadow-sm p-2">Add Users</h4>
+            <h4 class="bg-light shadow-sm p-2">Users</h4>
+
+            <%= form_with url: "/friend_requests/search", method: :get, local: false, class: "mx-2 my-3" do |form| %>
+                <%= form.text_field :query %>
+                <%= form.submit "Search" %>
+            <% end %>
+
             <div class="new-users-container">
                 <%@new_users.each do |user|%>
                     <div class="new-user-card d-flex flex-column bg-light m-2">
