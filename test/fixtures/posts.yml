@@ -1,9 +1,10 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
+#bin/rails test test/models/post_test.rb
+
 one:
   title: MyString
-  body: MyText
-
-two:
-  title: MyString
-  body: MyText
+  body: MyText that is long enough for body
+  user_id: 1
+  postable_id: 1
+  postable_type: Wall

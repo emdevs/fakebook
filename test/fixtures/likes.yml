@@ -2,8 +2,8 @@
 
 one:
   user: one
-  post: one
+  likeable_id: 1
 
 two:
   user: two
-  post: two
+  likeable_id: 1
