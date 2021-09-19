@@ -7,6 +7,17 @@
 }
 
 .comment {
+    .content {
+        width: 100%;
+    }
+    .topbar {
+        // border: 1px solid;
+    }
+    .square-frame {
+        width: 35px;
+
+    }
+
     .date {
         font-size: 0.8rem;
     }

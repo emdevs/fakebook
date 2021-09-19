@@ -8,7 +8,7 @@ class Post < ApplicationRecord
 
     belongs_to :user
     #make post polymorphic! (can belong to either wall or club)
-    belongs_to :postable, polymorphic: true, dependent: :destroy
+    belongs_to :postable, polymorphic: true
 
     has_one_attached :image
 

@@ -9,7 +9,7 @@ class Walls::PostsController < PostsController
     private
 
     def load_postable
-        @postable = Wall.find(1)
+        @postable = Wall.first
         @postable_name = "wall"
     end
 end

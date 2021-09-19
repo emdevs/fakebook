@@ -1,3 +1,5 @@
+require @local_time
+
 class MessagesController < ApplicationController
     
     def create
@@ -21,7 +23,7 @@ class MessagesController < ApplicationController
         channel.broadcast_to(messagable, {
             user: @user,
             message: @message,
-            datetime: @message.datetime
+            datetime: @message.created_at,
         })
     end
 

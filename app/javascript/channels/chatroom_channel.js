@@ -1,11 +1,11 @@
 import consumer from "./consumer"
+import LocalTime from "local-time"
 
 //keep track of subscribed club ids. dont allow user to subscribe more than once to same club. 
 let subscribed_club_ids = [];
 
 document.addEventListener('turbolinks:load', function() {
     let chatroom_chat = document.getElementsByClassName("chatroom-chat")[0];
-
     //if there is chatroom found:
     if (chatroom_chat) {
         //automatically scroll to bottom.
@@ -47,7 +47,7 @@ document.addEventListener('turbolinks:load', function() {
                             <div class="text">
                                 <div class="meta-info d-flex">
                                     <p class="name m-0 text-primary">${data["user"]["name"]}</p>
-                                    <p class="datetime m-0 px-2 text-muted">${"a few seconds ago"}</p>
+                                    <p class="datetime m-0 px-2 text-muted">${data["datetime"]}</p>
                                 </div>
                                 <p class="msg m-0">${data["message"]["message"]}</p>
                             </div>
