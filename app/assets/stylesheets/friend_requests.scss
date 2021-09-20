@@ -5,6 +5,7 @@
 @import 'colors';
 
 .friend-requests {
+    max-width: 1100px;
     display: grid;
     grid-template: auto / 4fr 1fr;
     grid-gap: 1rem;
@@ -18,17 +19,24 @@
     }
 
     h4 {
-        background-color: $fb-dark;
+        // background-color: $fb-dark;
+        font-size: 16px;
+        color: grey;
+        // border: 1px solid red;
     }
 
     .new-users {
         h4 {
-            color: $fb-color;
+            // color: $fb-color;
         }
+
+        // .search-field {
+        //     border-color: rgb(184, 184, 184);
+        // }
     }
 
     .notfriend-column {
-        // min-width: 75%;
+        // min-width: 75%
         
         //view profile links
         .view-profile {
@@ -42,43 +50,48 @@
         }
 
 
-        .cancel-button:hover {
-            background-color: $muted-red;
-            color: white;
-        }
+        // .cancel-button:hover {
+        //     background-color: $muted-red;
+        //     color: white;
+        // }
 
-        .success-button:hover {
-            background-color: $muted-green;
-            color: white;
-        }
+        // .success-button:hover {
+        //     background-color: $muted-green;
+        //     color: white;
+        // }
 
-        .incoming-requests, .sent-requests {
-            background-color: $chat-background;
-        }
+        
 
         .new-users{
-            background-color: $fb-dark;
+            // background-color: $fb-dark;
+            background-color: rgb(219, 219, 219);
+            .search-field {
+                padding: 0.3em;
+                width: 100%;
+            }
             min-height: 300px;
         }
 
         .new-users-container {
-            display: grid;
-            grid-template: auto / repeat(5, 1fr);
+            height: 300px;
+            overflow-y: scroll;
+            // display: grid;
+            // grid-template: auto / repeat(5, 1fr);
 
-            @media screen and (max-width: 1025px) {
-                grid-template: auto / repeat(4, 1fr);
-            }
-            @media screen and (max-width: 768px) {
-                grid-template: auto / repeat(3, 1fr);
-            }
-            
+            // @media screen and (max-width: 1025px) {
+            //     grid-template: auto / repeat(4, 1fr);
+            // }
+            // @media screen and (max-width: 768px) {
+            //     grid-template: auto / repeat(3, 1fr);
+            // }
         }
 
     }
 
     .friend-card{
         .links {
-            font-size: 0.9rem;
+
+            // font-size: 0.9rem;
         }
     }
 }

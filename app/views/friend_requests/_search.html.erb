@@ -1,34 +1,36 @@
-<%# assumes that all users fetched not ur friend. prob add conditional. %>
 <%@users.each do |user|%>
-    <div class="new-user-card d-flex flex-column bg-light m-2">
+    <div class="d-flex bg-light m-2">
         <div class="square-frame">
             <img src="<%=asset_path(url_for(user.profile.attached_img))%>">
         </div>
-        <%=link_to "#{user.name}", user_profile_path(user), class: "profile-link text-center m-2 mb-3"%> 
 
-        <%friend_request_result = current_user.friend_request_with(user)%>
-        
-        <%if friend_request_result.count > 0 %>
-            <%friend_request = friend_request_result.first%>
+        <div class="d-flex justify-content-between align-items-center w-100 m-2">
+            <%=link_to "#{user.name}", user_profile_path(user), class: "profile-link text-center mr-2 "%> 
 
-            <% if friend_request.status == true %>
-                <%=button_to "Unfriend", friend_request_path(friend_request),
-                    method: :delete,
-                    data: {confirm: "Are you sure? You will no longer be able to message this person."},
-                    class: "text-danger w-100"%>
+            <%friend_request_result = current_user.friend_request_with(user)%>
+            
+            <%if friend_request_result.count > 0 %>
+                <%friend_request = friend_request_result.first%>
+
+                <% if friend_request.status == true %>
+                    <%=button_to "Unfriend", friend_request_path(friend_request),
+                        method: :delete,
+                        data: {confirm: "Are you sure? You will no longer be able to message this person."},
+                        class: "btn btn-light btn-sm  border w-100"%>
+                <%else%>
+                    <%# either someone has sent an invite, or current_user is waiting on response.  %>
+                    <% if friend_request.requester_id == current_user.id %>
+                        <%=button_to "Cancel Invite", friend_request_path(friend_request), method: :delete, class: "btn btn-danger btn-sm rounded border w-100"%>
+                    <% else %>
+                        <div class="d-flex">
+                            <%=button_to "Accept", friend_request_path(friend_request), method: :patch, class: "btn btn-primary btn-sm rounded border mx-2"%>
+                            <%=button_to "Decline", friend_request_path(friend_request), method: :delete, class: "btn btn-light btn-sm rounded border"%>
+                        </div>
+                    <% end %>
+                <%end%>
             <%else%>
-                <%# either someone has sent an invite, or current_user is waiting on response.  %>
-                <% if friend_request.requester_id == current_user.id %>
-                    <%=button_to "Cancel Invite", friend_request_path(friend_request), method: :delete, class: "cancel-button rounded border w-100"%>
-                <% else %>
-                    <div class="d-flex w-100 justify-content-evenly">
-                        <%=button_to "Accept", friend_request_path(friend_request), method: :patch, class: "success-button rounded border"%>
-                        <%=button_to "Decline", friend_request_path(friend_request), method: :delete, class: "cancel-button rounded border"%>
-                    </div>
-                <% end %>
+                <%=button_to "Invite", friend_requests_path(reciever_id: user.id), method: :post, class: "btn btn-sm btn-light border rounded w-100"%>
             <%end%>
-        <%else%>
-            <%=button_to "Invite", friend_requests_path(reciever_id: user.id), method: :post, class: "success-button border rounded w-100"%>
-        <%end%>
+        </div>
     </div>
 <%end%>
