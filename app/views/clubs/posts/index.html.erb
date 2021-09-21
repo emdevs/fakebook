@@ -1,5 +1,12 @@
 <div class="w-100 d-flex justify-content-center">
     <%# need to add button for adding posts %>
+
+    <div id="club-plus-button">
+        <%=link_to "", new_club_post_path(@club), class: "link" %>
+        <img class="" src="<%=asset_path("icons8-plus-96.png")%>">      
+    </div>
+
+
     <div id="main-posts" class="d-flex flex-column align-items-center">
         <%@posts.each do |post|%>
             <div class="post d-flex flex-column bg-white shadow-sm mb-4 p-3">

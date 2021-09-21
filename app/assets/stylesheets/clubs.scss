@@ -21,6 +21,21 @@
 
 //clubs index
 
+#club-plus-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    img {
+        width: 75px;
+        height: 75px;
+    }
+    .link {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+    }
+}
+
 #clubs {
     display: grid;
     grid-template: auto / repeat(3, 1fr);
