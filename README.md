@@ -38,7 +38,7 @@ Comments and likes allow other users to interact with existing posts. Both posts
 
 ### Friendships
 
-Friendships are a central feature of Facebook. Users can have friendships with other users through friend requests. New friendships instantiate a private chat that allows two friends to privately communicate with one another. 
+Friendships are a central feature of Facebook. Users can have friendships with other users through friend requests. On the 'Manage Friends' page, there is a search bar present which allows a user to search for other users by name. New friendships instantiate a private chat that allows two friends to privately communicate with one another. 
 
 #### Private Chat
 
@@ -47,7 +47,7 @@ history will persist after a friendship is terminated, however messaging will be
 
 ### Clubs
 
-Clubs are a feature that grants access to a select number of users access, through memberships. Each have their own post wall, which can only be viewed and posted to by their own members. Users can also create their own clubs, and set their own member capacity limit. For particularly annoying users, club owners have the ability to block members from their club, which denies them access to all club posts, as well as the club [chatroom](#chatroom).
+Clubs are a feature that grants access to a select number of users access, through memberships. Each have their own post wall, which can only be viewed and posted to by their own members. Users can also create their own clubs, and set their own member capacity limit. For particularly annoying users, club owners have the ability to block members from their club, which denies them access to all club posts as well as the club chatroom.
 
 
 #### Chatroom
